@@ -12,6 +12,8 @@ In JS6 MP achieved with
 
 # Symbols
  Symbols are new primitive types just like Number, String, and Boolean. They are tokens that serves as unique ID's for object properties
+ 
+
 
 
 
