@@ -7,5 +7,5 @@ In JS6 MP can be achieved with
 
 * Symbols 
 * Proxies
-* Reflection
+* Reflections
 
