@@ -1,5 +1,4 @@
-# Meta Programming
-*Enabling self-adapting code*
+# Meta Programming *Enabling self-adapting code*
 
 
 
