@@ -11,7 +11,6 @@ In JS6 MP achieved with
 
 
 # Symbols
-TYPE: PRIMITIVE
 
 
 
