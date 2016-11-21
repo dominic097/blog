@@ -1,6 +1,4 @@
 # Meta Programming 
 *Enabling self-adapting code*
 
-
-
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+    Meta-Programming [MP] an art of writing program that can rewrite itself. ```eval```  a part of JS since begin of Time(ES1) is a gimmick for MP. 
