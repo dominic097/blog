@@ -1,0 +1,40 @@
+{
+  "name": "dS",
+  "simpleName": "blog",
+  "version": "0.0.1",
+  "author": "Dominic <dominic097@gmail.com>",
+  "main": "",
+  "keywords": [
+
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dominic097/dS.git"
+  },
+  "presets": [
+    "es2016"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^5.12.1",
+    "eslint": "^3.10.2",
+    "gitbook-cli": "^2.3.0",
+    "gulp": "^3.8.8",
+    "gulp-coveralls": "^0.1.3",
+    "gulp-istanbul": "^0.3.0",
+    "gulp-mocha": "^1.0.0",
+    "istanbul": "^0.4.2",
+    "jslint": "^0.9.6",
+    "mocha": "^2.2.5",
+    "should": "^7.0.2",
+    "vinyl-source-stream": "^1.0.0"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "coveralls": "gulp coveralls",
+    "docs:prepare": "gitbook install",
+    "docs:watch": "npm run docs:prepare && gitbook serve",
+    "docs:build": "npm run docs:prepare && rm -rf _book && gitbook build",
+    "docs:publish": "npm run docs:build && cd _book && git init && git commit --allow-empty -m 'Update docs' && git checkout -b gh-pages && git add . && git commit -am 'Update docs' && git push git@github.com:dominic097/dS gh-pages --force"
+  }
+}
