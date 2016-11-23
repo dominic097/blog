@@ -1,4 +1,4 @@
 # Symbols
- A primitive data types that serves as unique ID's for object properties.
+ A primitive data types that serves as unique identifier for object properties.
 
 
