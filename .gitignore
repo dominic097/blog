@@ -1,3 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+### GitBook template
 # Node rules:
 ## Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
@@ -14,3 +16,10 @@ _book
 *.epub
 *.mobi
 *.pdf
+# ignorring WS .ideae DIR
+/.idea/
+
+/dist/
+
+
+npm-debug.log
