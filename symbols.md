@@ -2,6 +2,8 @@
 
 A** primitive data** types that serves as unique identifier for object properties and Hooyah !!! its **Immutable** 
 
+---
+
 While ES6 has introduced many features that have been on developer's wish list for quite some time there are some new features and its benefits are less well known, so why wait lets dig-in ...
 
 ### Creating New Symbols
@@ -40,6 +42,7 @@ console.log(symbol2) // <== World
 ### **Usage**
 
 well as you have gessed by now, it can be used as keys of properties which is a best fit to create Immutable data types
+
 
 
 
