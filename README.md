@@ -26,7 +26,7 @@ In JS6 MP can be achieved with
 
 
 
-# [Symbols](https://dominic097.github.io/blog/symbols.html)
+# [Symbols](/blog/symbols.html)
 
 
 
