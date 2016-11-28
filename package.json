@@ -13,7 +13,6 @@
     "es2016"
   ],
   "dependencies": {
-    "gitbook-plugin-advanced-emoji": "^0.2.1"
   },
   "devDependencies": {
     "browserify": "^5.12.1",
