@@ -6,13 +6,13 @@ Meta-Programming [MP] an art of writing program with an ability to rewrite itsel
 
 In JS6 MP can be achieved with
 
-* ##### [[Symbols](/blog/symbols.html)]
+* ##### [Symbols](/blog/symbols.html)
 
 * ##### Proxies
 
 * ##### Reflections
 
-# [[Symbols](/symbols.html)]
+# [Symbols](/symbols.html)
 
  Symbols are new primitive types just like Number, String, and Boolean. They are tokens that serves as unique ID's for object properties
 
