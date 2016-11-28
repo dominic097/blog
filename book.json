@@ -1,6 +1,5 @@
 {
     "plugins": [
-        "blog",
         "blog-r24y",
         "es6tabs",
         "es6tabs-stage-0"
