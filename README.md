@@ -14,7 +14,7 @@ In JS6 MP can be achieved with
 
 
 
-* Symbols
+* [Symbols](https://dominic097.github.io/blog/symbols.html)
 
 
 
@@ -26,7 +26,7 @@ In JS6 MP can be achieved with
 
 
 
-# Symbols
+# [Symbols](https://dominic097.github.io/blog/symbols.html)
 
 
 
