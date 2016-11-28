@@ -26,14 +26,18 @@ foo === bar // false
 
 ```
 
-By the above code snippet, it is guaranteed that symbols are always unique The label does not affect the value of the symbol as I mentioned above, but it is useful for debugging though, and is shown if the symbol’s `toString()` method is called. However it is possible to create a Symbols with same string, but that would be irrational as it serve no purpose and would probably just lead to confusion.
+By the above code snippet, it is guaranteed that symbols are **always unique** The label does not affect the value of the symbol as I mentioned above, but it is useful for debugging though, and `Symbol() `is shown if the symbol’s `toString()` method is called. However it is possible to create a Symbols with same string, but that would be irrational as it serve no purpose and would probably just lead to confusion.
 
 ```js
+
 let symbol1 = Symbol('Hello');
 let symbol2= Symbol('World');
 symbol1 === symbol2 // false
 console.log(symbol2) // <== World
+
 ```
+
+
 
 
 
