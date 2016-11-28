@@ -5,7 +5,7 @@ Meta-Programming [MP] an art of writing program with an ability to rewrite itsel
 
 In JS6 MP can be achieved with
 
-* ##### [Symbols](https://dominic097.github.io/blog/symbols.html)
+* ##### [Symbols](/blog/symbols.html)
 
 * ##### Proxies
 
