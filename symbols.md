@@ -10,7 +10,7 @@ As Symbols are primitive data type, they are created via a factory function Symb
 
 ```js
 
-const mySymbol = Symbol('mySymbol');
+let symbol = Symbol('symbol');
 
 ```
 
