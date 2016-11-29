@@ -321,7 +321,7 @@ function _toPrimitive(hint) {
     }
 }
 let array = [1, 5, 3]; 
-array[Symbol.toPrimitive] = arrayToPrimitive; 
+array[Symbol.toPrimitive] = _toPrimitive; 
 
 // array to number. hint is 'number'
 + array; // => 9 
