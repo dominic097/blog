@@ -141,13 +141,13 @@ let localSym = Symbol();
 Symbol.keyFor(localSym); // <== undefined
 ```
 
-### _`@@iterator`_ to make the object Iterable
+### `@@iterator` to make the object Iterable
 
 Symbol.iterator probably a well-known symbol specifies the default iterator for an object. It allows to define how the object should be iterated using for...of statement or consumed by ... spread operator.
 
 Many built-in types like strings, arrays, maps, sets are iterables, i.e. they have an _ @@iterator_ function whose behaviour can be tamed by using Symbols
 
-**_@@iterator_** method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
+_**@@iterator**_ method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
 
 Some built-in types have a default iteration behavior, while other types \(such as Object\) do not. The built-in types with a _@@iterator_ method are:
 
@@ -200,7 +200,7 @@ for (var o of obj) {
 
 ```
 
-As per the above example **_@@iterator_** property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
+As per the above example _**@@iterator**_ property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
 
 If the primitive type or object has an @@iterator method, then it can be applied in the following constructs:
 
@@ -211,7 +211,7 @@ If the primitive type or object has an @@iterator method, then it can be applied
 * In constructors for **Map**\(iterableObject\), **WeakMap**\(iterableObject\), **Set**\(iterableObject\), **WeakSet**\(iterableObject\)
 * In promise static methods **Promise.all\(iterableObject\)**,** Promise.race\(iterableObject\)**
 
-### _`@@hasInstance`_ to customize `instanceof`
+### `@@hasInstance` to customize `instanceof`
 
 By default the _instanceof_ operator verifies if the prototype chain of an Object contains that instance, For Example:
 
@@ -262,8 +262,7 @@ name.concat([], Age); // <== ["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 
 
 As per the above example, by setting `_isConcatSpreadable_` as _false_ keeps the array _Age_ intact in the concatenation result `["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 24]]`
 
-
-On the Contrary to an array, by default .concat() method does not spread the array-like objects. But it can be achievable by setting `_isConcatSpreadable_` as _true_
+On the Contrary to an array, by default .concat\(\) method does not spread the array-like objects. But it can be achievable by setting `_isConcatSpreadable_` as _true_
 
 ```js
 
@@ -284,8 +283,9 @@ name.concat([], Age) // <== ["Jhone", "Dominic", "Sam", "Venkat", 48, 24, 40, 24
 
 ```
 
-### _`@@unscopables`_ for properties accessibility within _`with`_
-In ES5 the use _`@@unscopables`_ is for Arrays only meaning it can be used to hide the new methods that may override variables with the same name in older JS code. Thus _**Symbol.unscopables**_ is an object valued property whose own property names are property names that can be excluded from the _**with**_ environment bindings of the associated object. 
+### `@@unscopables` for properties accessibility within `with`
+
+In ES5 the use `@@unscopables` is for Arrays only meaning it can be used to hide the new methods that may override variables with the same name in older JS code. Thus **_Symbol.unscopables_** is an object valued property whose own property names are property names that can be excluded from the **_with_** environment bindings of the associated object.
 
 ```js
 Array.prototype[Symbol.unscopables]; 
@@ -299,11 +299,12 @@ with(Age) {
 }
 ```
 
-The method .entries() is listed in the **_@@unscopables_** property with _true_, thus it is not available within _with_ block.
+The method .entries\(\) is listed in the _**@@unscopables**_ property with _true_, thus it is not available within _with_ block.
 
-**_`@@unscopables`_** exists mostly for backward compatibility with older JS code that utilizes _with_ block.
+`@@unscopables` exists mostly for backward compatibility with older JS code that utilizes _with_ block.
 
-### _`@@toPrimitive`_ to convert an object to a primitive type
+### `@@toPrimitive` to convert an object to a primitive type
+
 Specifies a function valued property, when called upon converts an object to a corresponding primitive value.
 
 ```js
@@ -333,6 +334,12 @@ Age is ${array}`; // => 'Age is [10, 25, 30]'
 
 ```
 
-As per above example _**_toPrimitive**_ is function that Array to a primitive data type depending on _hint_ The assignment `Array[Symbol.toPrimitive] = _toPrimitive` makes the array to use the new conversion method. 
+As per above example **_\_toPrimitive_** is function that Array to a primitive data type depending on _hint_ The assignment `Array[Symbol.toPrimitive] = _toPrimitive` makes the array to use the new conversion method.
 
+Thus `@@toPrimitive` method is used when an object interacts with a primitive type:
+
+* In equality operator object == primitive
+* In addition\/concatenation operator object + primitive
+* In subtraction operator object - primitive
+* Different situations when an object is coerced to a primitive: String\(object\), Number\(object\), etc.
 
