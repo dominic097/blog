@@ -111,11 +111,11 @@ When the Global Registry is defnied it would have the fallowing data-structure
 
 #### **Symbol.for\(key\)**
 
-In contrast of `Symbol()`, the `.for(key)` function searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found. Otherwise a new symbol is created in the global symbol registry with this key.
+In contrast of `Symbol()`, the `.for(key)` function searches for existing symbols in a runtime-wide symbol registry `[[Symbols]]` with the given key and returns it if found. Otherwise a new symbol is created in the global symbol registry with this key.
 
 ```js
 Symbol.far('node.LEFT'); // would create a new global Symbol
-Symbol.far('node.LEFT'); // retieve the already available Symbol from Global registry 
+Symbol.far('node.LEFT'); // retieve the already available Symbol from Global registry [[Symbols]]
 
 // Global Symbol of same string are alway equal
 Symbol.far('node.LEFT') == Symbol.far('node.LEFT'); // true
