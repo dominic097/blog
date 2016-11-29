@@ -255,5 +255,6 @@ name.concat([], Age) // <== ["Jhone", "Dominic", "Sam", "Venkat", 48, 24, 40, 24
 Age[Symbol.isConcatSpreadable] = false;
 
 name.concat([], Age); // <== ["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 24]]
+
 ```
 
