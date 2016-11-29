@@ -258,3 +258,5 @@ name.concat([], Age); // <== ["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 
 
 ```
 
+As per the above example, by setting `_isConcatSpreadable_` as _false_ keeps the array _Age_ intact in the concatenation result `["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 24]]`
+
