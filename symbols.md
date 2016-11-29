@@ -126,9 +126,10 @@ const stmNodeLeft = Symbol.for("node.LEFT");
 symNodeLeft.toString()' //<== "Symbol(node.LEFT)"
 
 ```
+
 #### **Symbol.keyFor\(key\)**
 
-The .Keyfor() function retrieves a shared symbols key from the global symbol registry **`[[Keys]]`** for the given symbols
+The .Keyfor\(\) function retrieves a shared symbols key from the global symbol registry `[[Keys]]` for the given symbols
 
 ```js
 let node_left = Symbol.for("node.LEFT");
