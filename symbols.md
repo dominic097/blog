@@ -86,9 +86,43 @@ console.log(node[getAttr]()); // <== Hello getAttr;
 
 Given the fact that the `Symbols` can be used as property keys, it has re-defined the terminology as `Property Keys are either strings or Symbols` in ES6 hence symbol-valued property keys are called _property symbols_
 
+```js
+const node = {
+    [Symbol('enumSample')] : null,
+    data: {},
+    sampleTxt: "Hi There !!! "
+}
 
+//Ignores symbol-valued property keys
+ Object.getOwnPropertyNames(node) // <== ['data', 'sampleTxt']
+ Object.keys(node) // <== ['data', 'sampleTxt']
 
+//Ignores string-values property keys:
+Object.getOwnPropertySymbols(obj) // <== [Symbol(enumSample)]
 
+```
+
+### **The Global Registry**
+
+The Es6 specification defines a runtime-wide symbol registry, which enables one can store and retrieve symbols across different contexts, such as between a document and an embedded iframe or service worker.
+
+#### **Symbol.for(key)**
+ 
+ In contrast of `Symbol()`, the `.for(key)` function searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found. Otherwise a new symbol is created in the global symbol registry with this key.
+
+```js
+Symbol.far('node.LEFT'); // would create a new global Symbol
+Symbol.far('node.LEFT'); // retieve the already available Symbol from Global registry 
+
+// Global Symbol of same string are alway equal
+Symbol.far('node.LEFT') == Symbol.far('node.LEFT'); // true
+// however  not the same for local context
+Symbol('node.LEFT') == Symbol('node.LEFT'); // false
+
+const stmNodeLeft = Symbol.for("node.LEFT");
+symNodeLeft.toString()' //<== "Symbol(node.LEFT)"
+
+```
 
 
 
