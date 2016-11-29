@@ -84,7 +84,7 @@ const node = {
 console.log(node[getAttr]()); // <== Hello getAttr;
 ```
 
-
+Given the fact that the `Symbols` can be used as property keys, it has re-defined the terminology as `Property Keys are either strings or Symbols` in ES6 hence symbol-valued property keys are called _property symbols_
 
 
 
