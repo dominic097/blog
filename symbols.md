@@ -211,4 +211,33 @@ If the primitive type or object has an @@iterator method, then it can be applied
 * In constructors for **Map**\(iterableObject\), **WeakMap**\(iterableObject\), **Set**\(iterableObject\), **WeakSet**\(iterableObject\)
 * In promise static methods **Promise.all\(iterableObject\)**,** Promise.race\(iterableObject\)**
 
+### _@@hasInstance_ to customize _`instanceof`_
+By default the _instanceof_ operator verifies if the prototype chain of an Object contains that instance, For Example: 
+
+```js
+function Constructor() {  
+  // constructor code
+}
+let obj = new Constructor();  
+let objProto = Object.getPrototypeOf(obj);  
+objProto === Constructor.prototype; // => true  
+obj instanceof Constructor;         // => true  
+obj instanceof Object;              // => true  
+```
+
+As per the above Ex, the obj _`instanceof`_ evaluates to true as the prototype of the Object equals _`Constructor.prototype`_
+
+Unfortunatly Often an application does not deal with prototypes and requires a more specific instance verification thus comes the _`Symbol.hasInstance`_ a well-known symbol which can be used to determine if a constructor object recognizes an object as its instance. For Ex,
+
+```js
+class MyArray { 
+    static [Symbol.hasInstance](instance) { 
+        return Array.isArray(instance); 
+    }
+}
+
+console.log([] instanceof MyArray); // <== true
+
+```
+
 
