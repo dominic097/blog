@@ -320,17 +320,17 @@ function _toPrimitive(hint) {
         return this.toString(); 
     }
 }
-let array = [1, 5, 3]; 
-array[Symbol.toPrimitive] = _toPrimitive; 
+let Age = [10, 25, 30]; 
+Age[Symbol.toPrimitive] = _toPrimitive; 
 
 // array to number. hint is 'number'
-+ array; // => 9 
++ Age; // => 9 
 
 // array to string. hint is 'string' 
-array is ${array}`; // => 'array is [1, 5, 3]'
+Age is ${array}`; // => 'Age is [10, 25, 30]'
 
 // array to default. hint is 'default' 
-'array elements: ' + array; // => 'array elements: 1,5,3'
+'Age elements: ' + array; // => 'array elements: 10, 25, 30'
 
 ```
 
