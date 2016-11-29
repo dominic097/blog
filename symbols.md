@@ -303,4 +303,6 @@ The method .entries() is listed in the **_@@unscopables_** property with _true_,
 
 **_`@@unscopables`_** exists mostly for backward compatibility with older JS code that utilizes _with_ block.
 
+### _`@@toPrimitive`_ to convert an object to a primitive
+
 
