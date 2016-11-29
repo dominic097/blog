@@ -2,7 +2,6 @@
     "plugins": [
         "blog-r24y",
         "es6tabs",
-        "editlink",
         "share"
     ]
 }
