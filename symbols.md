@@ -123,7 +123,7 @@ Symbol.far('node.LEFT') == Symbol.far('node.LEFT'); // true
 Symbol('node.LEFT') == Symbol('node.LEFT'); // false
 
 const stmNodeLeft = Symbol.for("node.LEFT");
-symNodeLeft.toString()' //<== "Symbol(node.LEFT)"
+symNodeLeft.toString(); //<== "Symbol(node.LEFT)"
 
 ```
 
