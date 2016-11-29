@@ -241,5 +241,19 @@ console.log([] instanceof MyArray); // <== true
 ```
 
 ### _`@@isConcatSpreadable`_ to convert an object to flat array elements
+As the name suggest it is a Boolean valued property indicating if an Object can be flattened to an Array Elements by _`Array.prototype.concat()`_ function 
 
+```js
+// Array of names 
+const name = ["Jhone", "Dominic", "Sam", "Venkat"];
+
+// Array of Age corresponding to the name array
+const Age = [48, 24, 40, 24];
+
+name.concat([], Age) // <== ["Jhone", "Dominic", "Sam", "Venkat", 48, 24, 40, 24]
+
+Age[Symbol.isConcatSpreadable] = false;
+
+name.concat([], Age); // <== ["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 24]]
+```
 
