@@ -306,5 +306,33 @@ The method .entries() is listed in the **_@@unscopables_** property with _true_,
 ### _`@@toPrimitive`_ to convert an object to a primitive type
 Specifies a function valued property, when called upon converts an object to a corresponding primitive value.
 
+```js
+function arrayToPrimitive(hint) { 
+    if (hint === 'number') { 
+        return this.reduce((sum, num) => sum + num); 
+    }
+    else if (hint === 'string') {
+        return `[${this.join(', ')}]`;
+    }
+    else {
+         
+        // hint is default 
+        return this.toString(); 
+    }
+}
+let array = [1, 5, 3]; 
+array[Symbol.toPrimitive] = arrayToPrimitive; 
+
+// array to number. hint is 'number'
++ array; // => 9 
+
+// array to string. hint is 'string' 
+array is ${array}`; // => 'array is [1, 5, 3]'
+
+// array to default. hint is 'default' 
+'array elements: ' + array; // => 'array elements: 1,5,3'
+
+```
+
 
 
