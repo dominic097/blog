@@ -307,7 +307,7 @@ The method .entries() is listed in the **_@@unscopables_** property with _true_,
 Specifies a function valued property, when called upon converts an object to a corresponding primitive value.
 
 ```js
-function arrayToPrimitive(hint) { 
+function _toPrimitive(hint) { 
     if (hint === 'number') { 
         return this.reduce((sum, num) => sum + num); 
     }
