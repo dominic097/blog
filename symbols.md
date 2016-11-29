@@ -141,7 +141,7 @@ let localSym = Symbol();
 Symbol.keyFor(localSym); // <== undefined
 ```
 
-### _**@@iterator**_ to make the object Iterable
+### _`@@iterator`_ to make the object Iterable
 
 Symbol.iterator probably a well-known symbol specifies the default iterator for an object. It allows to define how the object should be iterated using for...of statement or consumed by ... spread operator.
 
@@ -211,7 +211,7 @@ If the primitive type or object has an @@iterator method, then it can be applied
 * In constructors for **Map**\(iterableObject\), **WeakMap**\(iterableObject\), **Set**\(iterableObject\), **WeakSet**\(iterableObject\)
 * In promise static methods **Promise.all\(iterableObject\)**,** Promise.race\(iterableObject\)**
 
-### _@@hasInstance_ to customize _`instanceof`_
+### _`@@hasInstance`_ to customize _`instanceof`_
 By default the _instanceof_ operator verifies if the prototype chain of an Object contains that instance, For Example: 
 
 ```js
@@ -239,5 +239,7 @@ class MyArray {
 console.log([] instanceof MyArray); // <== true
 
 ```
+
+### _`@@isConcatSpreadable`_ to convert an object to flat array elements
 
 
