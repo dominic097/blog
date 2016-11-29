@@ -95,4 +95,3 @@ console.log(node[getAttr]()); // <== Hello getAttr;
 
 
 
-
