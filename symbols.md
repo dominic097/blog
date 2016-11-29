@@ -141,13 +141,13 @@ let localSym = Symbol();
 Symbol.keyFor(localSym); // <== undefined
 ```
 
-### _**@@iterator**_** to make the object Iterable**
+### _@@_**_iterator_**** to make the object Iterable**
 
 Symbol.iterator probably a well-known symbol specifies the default iterator for an object. It allows to define how the object should be iterated using for...of statement or consumed by ... spread operator.
 
 Many built-in types like strings, arrays, maps, sets are iterables, i.e. they have an _ @@iterator_ function whose behaviour can be tamed by using Symbols
 
-_**@@iterator**_ method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
+**_@@iterator_** method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
 
 Some built-in types have a default iteration behavior, while other types \(such as Object\) do not. The built-in types with a _@@iterator_ method are:
 
@@ -160,6 +160,8 @@ Some built-in types have a default iteration behavior, while other types \(such 
 * Map.prototype
 
 * Set.prototype
+
+
 
 
 
