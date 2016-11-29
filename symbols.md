@@ -314,8 +314,7 @@ function _toPrimitive(hint) {
     else if (hint === 'string') {
         return `[${this.join(', ')}]`;
     }
-    else {
-         
+    else {         
         // hint is default 
         return this.toString(); 
     }
@@ -334,5 +333,6 @@ Age is ${array}`; // => 'Age is [10, 25, 30]'
 
 ```
 
+As per above example _**_toPrimitive**_ is function that Array to a primitive data type depending on _hint_ The assignment `Array[Symbol.toPrimitive] = _toPrimitive` makes the array to use the new conversion method. 
 
 
