@@ -299,7 +299,7 @@ with(Age) {
 }
 ```
 
-The method .entries() is listed in the **_@@unscopables_** property with _true_, thus is not available within with.
+The method .entries() is listed in the **_@@unscopables_** property with _true_, thus it is not available within with.
 
 **_`@@unscopables`_** exists mostly for backward compatibility with older JavaScript code that utilizes with (which usage is deprecated and even not allowed in strict mode).
 
