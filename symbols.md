@@ -52,8 +52,6 @@ well as you have gessed by now, it can be used as keys of properties which is a 
 
 Therefore we can create an unlimited number of unique Symbols to an Object and be guaranteed that there will be no conflict with string Keys ot other unique Symbols
 
-
-
 #### Symbols as property keys
 
 ```js
@@ -106,9 +104,14 @@ Object.getOwnPropertySymbols(obj) // <== [Symbol(enumSample)]
 
 The Es6 specification defines a runtime-wide symbol registry, which enables one can store and retrieve symbols across different contexts, such as between a document and an embedded iframe or service worker.
 
-#### **Symbol.for(key)**
- 
- In contrast of `Symbol()`, the `.for(key)` function searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found. Otherwise a new symbol is created in the global symbol registry with this key.
+When the Global Registry is defnied it would have the fallowing data-structure
+
+* **\[\[Keys\]\] **- Array of Keys used to define Symbols
+* **\[\[Symbols\]\] **- Array of Symbols registered globally 
+
+#### **Symbol.for\(key\)**
+
+In contrast of `Symbol()`, the `.for(key)` function searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found. Otherwise a new symbol is created in the global symbol registry with this key.
 
 ```js
 Symbol.far('node.LEFT'); // would create a new global Symbol
@@ -123,9 +126,4 @@ const stmNodeLeft = Symbol.for("node.LEFT");
 symNodeLeft.toString()' //<== "Symbol(node.LEFT)"
 
 ```
-
-
-
-
-
 
