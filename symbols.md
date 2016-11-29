@@ -284,5 +284,19 @@ name.concat([], Age) // <== ["Jhone", "Dominic", "Sam", "Venkat", 48, 24, 40, 24
 
 ```
 
+### _`@@unscopables`_ for properties accessibility within _`with`_
+In ES5 the use _`@@unscopables`_ is for Arrays only meaning it can be used to hide the new methods that may override variables with the same name in older JS code. Thus _**Symbol.unscopables**_ is an object valued property whose own property names are property names that can be excluded from the _**with**_ environment bindings of the associated object. 
+
+```js
+Array.prototype[Symbol.unscopables]; 
+// <== { copyWithin: true, entries: true, fill: true,
+// find: true, findIndex: true, keys: true }
+
+let Age = [45,24,56,34];
+with(Age) {
+    Age.concat([], 22); // <== [45,24,56,34, 22]
+    entries; // <== VM975:2 Uncaught ReferenceError: entries is not defined(...)
+}
+```
 
 
