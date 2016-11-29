@@ -141,13 +141,13 @@ let localSym = Symbol();
 Symbol.keyFor(localSym); // <== undefined
 ```
 
-### _`@@iterator`_ to make the object Iterable
+### `@@iterator` to make the object Iterable
 
 Symbol.iterator probably a well-known symbol specifies the default iterator for an object. It allows to define how the object should be iterated using for...of statement or consumed by ... spread operator.
 
 Many built-in types like strings, arrays, maps, sets are iterables, i.e. they have an _ @@iterator_ function whose behaviour can be tamed by using Symbols
 
-_**@@iterator**_ method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
+**_@@iterator_** method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
 
 Some built-in types have a default iteration behavior, while other types \(such as Object\) do not. The built-in types with a _@@iterator_ method are:
 
@@ -200,7 +200,7 @@ for (var o of obj) {
 
 ```
 
-As per the above example _**@@iterator**_ property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
+As per the above example **_@@iterator_** property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
 
 If the primitive type or object has an @@iterator method, then it can be applied in the following constructs:
 
@@ -211,8 +211,9 @@ If the primitive type or object has an @@iterator method, then it can be applied
 * In constructors for **Map**\(iterableObject\), **WeakMap**\(iterableObject\), **Set**\(iterableObject\), **WeakSet**\(iterableObject\)
 * In promise static methods **Promise.all\(iterableObject\)**,** Promise.race\(iterableObject\)**
 
-### _`@@hasInstance`_ to customize _`instanceof`_
-By default the _instanceof_ operator verifies if the prototype chain of an Object contains that instance, For Example: 
+### `@@hasInstance` to customize `instanceof`
+
+By default the _instanceof_ operator verifies if the prototype chain of an Object contains that instance, For Example:
 
 ```js
 function Constructor() {  
@@ -225,9 +226,9 @@ obj instanceof Constructor;         // => true
 obj instanceof Object;              // => true  
 ```
 
-As per the above Ex, the obj _`instanceof`_ evaluates to true as the prototype of the Object equals _`Constructor.prototype`_
+As per the above Ex, the obj `instanceof` evaluates to true as the prototype of the Object equals `Constructor.prototype`
 
-Unfortunatly Often an application does not deal with prototypes and requires a more specific instance verification thus comes the _`Symbol.hasInstance`_ a well-known symbol which can be used to determine if a constructor object recognizes an object as its instance. For Ex,
+Unfortunatly Often an application does not deal with prototypes and requires a more specific instance verification thus comes the `Symbol.hasInstance` a well-known symbol which can be used to determine if a constructor object recognizes an object as its instance. For Ex,
 
 ```js
 class MyArray { 
@@ -240,8 +241,9 @@ console.log([] instanceof MyArray); // <== true
 
 ```
 
-### _`@@isConcatSpreadable`_ to convert an object to flat array elements
-As the name suggest it is a Boolean valued property indicating if an Object can be flattened to an Array Elements by _`Array.prototype.concat()`_ function 
+### `@@isConcatSpreadable` to convert an object to flat array elements
+
+As the name suggest it is a Boolean valued property indicating if an Object can be flattened to an Array Elements by `Array.prototype.concat()` function
 
 ```js
 // Array of names 
@@ -259,4 +261,28 @@ name.concat([], Age); // <== ["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 
 ```
 
 As per the above example, by setting `_isConcatSpreadable_` as _false_ keeps the array _Age_ intact in the concatenation result `["Jhone", "Dominic", "Sam", "Venkat", [48, 24, 40, 24]]`
+
+
+On the Contrary to an array, by default .concat() method does not spread the array-like objects. But it can be achievable by setting `_isConcatSpreadable_` as _true_
+
+```js
+
+// Array like Objects representing list of  names 
+
+const name = {0: "Jhone", 1: "Dominic", 2: "Sam", 3: "Venkat", length: 4};
+
+// Array of Age corresponding to the name array
+
+const Age = [48, 24, 40, 24];
+
+name.concat([], Age) // <== [{0: "Jhone", 1: "Dominic", 2: "Sam", 3: "Venkat", length: 4}, 48, 24, 40, 24]
+
+// setting isConcatSpreadable true for Array like Objects
+name[Symbol.isConcatSpreadable] = true;
+
+name.concat([], Age) // <== ["Jhone", "Dominic", "Sam", "Venkat", 48, 24, 40, 24]
+
+```
+
+
 
