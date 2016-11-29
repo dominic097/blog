@@ -141,13 +141,13 @@ let localSym = Symbol();
 Symbol.keyFor(localSym); // <== undefined
 ```
 
-### _@@_**_iterator_**** to make the object Iterable**
+### _@@__**iterator**_**\*\*** to make the object Iterable\*\*
 
 Symbol.iterator probably a well-known symbol specifies the default iterator for an object. It allows to define how the object should be iterated using for...of statement or consumed by ... spread operator.
 
 Many built-in types like strings, arrays, maps, sets are iterables, i.e. they have an _ @@iterator_ function whose behaviour can be tamed by using Symbols
 
-**_@@iterator_** method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
+_**@@iterator**_ method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
 
 Some built-in types have a default iteration behavior, while other types \(such as Object\) do not. The built-in types with a _@@iterator_ method are:
 
@@ -162,6 +162,51 @@ Some built-in types have a default iteration behavior, while other types \(such 
 * Set.prototype
 
 
+### **Usage**
 
+The following example creates an iterable object of a Linked list
 
+```js
+lass linkedList {
+
+    node(d, prev, next) {
+        return {[PREV]: prev, 'data': d, [NEXT]: next};
+    }
+
+    [Symbol.iterator]() { 
+        var i = 0,
+         ...
+         return { 
+            next: () => { 
+                if (i++ > 0) 
+                    _nodeToReturn = (_nodeToReturn[NEXT] ? _nodeToReturn[NEXT] : null); 
+                return { 
+                    value: <return value>, done: <Boolean>
+                   }
+             }
+           };
+     }
+
+...
+
+}
+
+var obj = new linkedList();
+
+for (var o of obj) {
+   length++;
+}
+
+```
+
+As per the above example _**@@iterator**_ property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
+
+If the primitive type or object have an @@iterator method, they can be applied in the following constructs:
+
+* Iterate over the elements in **for...of** loop
+* Create an array of elements using spread operator **\[...iterableObject\]**
+* Create an array of elements using **Array.from\(iterableObject\)**
+* In **yield\* expression** to delegate to another generator
+* In constructors for **Map**\(iterableObject\), **WeakMap**\(iterableObject\), **Set**\(iterableObject\), **WeakSet**\(iterableObject\)
+* In promise static methods **Promise.all\(iterableObject\)**,** Promise.race\(iterableObject\)**
 
