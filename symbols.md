@@ -52,17 +52,47 @@ well as you have gessed by now, it can be used as keys of properties which is a 
 
 Therefore we can create an unlimited number of unique Symbols to an Object and be guaranteed that there will be no conflict with string Keys ot other unique Symbols
 
-```js
 
+
+#### Symbols as property keys
+
+```js
 var node = {};
 const LEFT = Symbol('left');
 const RIGHT = Symbol('right');
+
+// const RIGHT = new Symbol('right'); //TypeError 
 ...
 //creating a node for double linked list
 node = {LEFT: null, data: d, Right: null};
 
-
+//using bracket notaion, 
+node[LEFT] = null;
+node[RIGHT] = null;
 ```
+
+A method definition can also have a computed key:
+
+```js
+const getAttr = Symbols();
+const node = {
+    [getAttr]() {
+        return 'Hello getAttr;'
+    }
+}
+
+console.log(node[getAttr]()); // <== Hello getAttr;
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
