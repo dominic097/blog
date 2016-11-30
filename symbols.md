@@ -147,7 +147,7 @@ Symbol.iterator probably a well-known symbol specifies the default iterator for 
 
 Many built-in types like strings, arrays, maps, sets are iterables, i.e. they have an _ @@iterator_ function whose behaviour can be tamed by using Symbols
 
-_**@@iterator**_ method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
+**_@@iterator_** method is called with no arguments, and the returned iterator is used to obtain the values to be iterated.
 
 Some built-in types have a default iteration behavior, while other types \(such as Object\) do not. The built-in types with a _@@iterator_ method are:
 
@@ -200,7 +200,7 @@ for (var o of obj) {
 
 ```
 
-As per the above example _**@@iterator**_ property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
+As per the above example **_@@iterator_** property also accepts a generator function, which makes it even more valuable. The generator function returns a generator object, which conforms to iterator protocol.
 
 If the primitive type or object has an @@iterator method, then it can be applied in the following constructs:
 
@@ -285,7 +285,7 @@ name.concat([], Age) // <== ["Jhone", "Dominic", "Sam", "Venkat", 48, 24, 40, 24
 
 ### `@@unscopables` for properties accessibility within `with`
 
-In ES5 the use `@@unscopables` is for Arrays only meaning it can be used to hide the new methods that may override variables with the same name in older JS code. Thus **_Symbol.unscopables_** is an object valued property whose own property names are property names that can be excluded from the **_with_** environment bindings of the associated object.
+In ES5 the use `@@unscopables` is for Arrays only meaning it can be used to hide the new methods that may override variables with the same name in older JS code. Thus _**Symbol.unscopables**_ is an object valued property whose own property names are property names that can be excluded from the _**with**_ environment bindings of the associated object.
 
 ```js
 Array.prototype[Symbol.unscopables]; 
@@ -299,7 +299,7 @@ with(Age) {
 }
 ```
 
-The method .entries\(\) is listed in the _**@@unscopables**_ property with _true_, thus it is not available within _with_ block.
+The method .entries\(\) is listed in the **_@@unscopables_** property with _true_, thus it is not available within _with_ block.
 
 `@@unscopables` exists mostly for backward compatibility with older JS code that utilizes _with_ block.
 
@@ -334,7 +334,7 @@ Age is ${array}`; // => 'Age is [10, 25, 30]'
 
 ```
 
-As per above example **_\_toPrimitive_** is function that Array to a primitive data type depending on _hint_ The assignment `Array[Symbol.toPrimitive] = _toPrimitive` makes the array to use the new conversion method.
+As per above example _**\_toPrimitive**_ is function that Array to a primitive data type depending on _hint_ The assignment `Array[Symbol.toPrimitive] = _toPrimitive` makes the array to use the new conversion method.
 
 Thus `@@toPrimitive` method is used when an object interacts with a primitive type:
 
@@ -343,8 +343,9 @@ Thus `@@toPrimitive` method is used when an object interacts with a primitive ty
 * In subtraction operator object - primitive
 * Different situations when an object is coerced to a primitive: String\(object\), Number\(object\), etc.
 
-### _`@@toStringTag`_ to create the default description of an object
-To create a default string description of an object to describe object type tag. It is used by the method Object.prototype.toString() by default
+### `@@toStringTag` to create the default description of an object
+
+To create a default string description of an object to describe object type tag. It is used by the method Object.prototype.toString\(\) by default
 
 When using `toString(<own class / object>)`
 
@@ -355,7 +356,7 @@ Object.prototype.toString.call(new linkedList()); // "[object Object]"
 
 ```
 
-Now, with the help of _`toStringTag()`_
+Now, with the help of `toStringTag()`
 
 ```js
 class linkedList {
@@ -368,3 +369,31 @@ Object.prototype.toString.call(new linkedList()); // "[object linkedList]"
 
 
 ```
+
+### Pros and Cons
+
+so far we went throught till now, what symbols are, what symbols are't and how they work ? but it's importan to know it Pro's and Cons out of it
+
+##### Pros
+
+
+
+##### Cons
+
+* Cant be read using exsiting Reflection tool set, need to use Object.getOwnPopertySymbols() to access an Object’s symbols
+
+* Will never conflict with Object string keys
+
+* They are **Not Private** as all of the Symbols of an object can be derived by using Object.getOwnSymbols()
+
+* Symbols are not coercible into primitives.
+
+* Symbols are not always unique due to _`Symbol.far()`_ global registry
+
+
+### Conclusion
+
+As we have seen so far, the Well-know symbols are properties that allow us to hack into some of JavaScript default functionalities, Thus making candidate for MP in JS.
+
+By using Symbols we adpot the nature of extensibility and redemption from polluting Object porperties
+
