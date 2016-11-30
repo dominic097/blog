@@ -343,3 +343,28 @@ Thus `@@toPrimitive` method is used when an object interacts with a primitive ty
 * In subtraction operator object - primitive
 * Different situations when an object is coerced to a primitive: String\(object\), Number\(object\), etc.
 
+### _`@@toStringTag`_ to create the default description of an object
+To create a default string description of an object. 
+
+When using `toString(<own class / object>)`
+
+```js
+class linkedList {}
+
+Object.prototype.toString.call(new linkedList()); // "[object Object]"
+
+```
+
+Now, with the help of _`toStringTag()`_
+
+```js
+class linkedList {
+    get [Symbol.toStringTag]() {
+        return "linkedList";
+    }
+}
+
+Object.prototype.toString.call(new linkedList()); // "[object linkedList]"
+
+
+```
