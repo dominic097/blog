@@ -2,6 +2,13 @@
     "plugins": [
         "blog-r24y",
         "es6tabs",
-        "share"
-    ]
+        "share",
+        "ga"
+    ],
+    "pluginsConfig": {
+        "ga": {
+            "token": "UA-88278648-2",
+            "configuration": "auto"
+        }
+    }
 }
