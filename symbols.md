@@ -374,21 +374,12 @@ Object.prototype.toString.call(new linkedList()); // "[object linkedList]"
 
 so far we went throught till now, what symbols are, what symbols are't and how they work ? but it's importan to know it Pro's and Cons out of it
 
-##### Pros
-
-
-
-##### Cons
-
+* Will never conflict with Object string keys
+* They are **Not Private** as all of the Symbols of an object can be derived by using Object.getOwnSymbols()
+* Symbols are not coercible into primitives.
+* Symbols are not always unique due to _`Symbol.far()`_ global registry
 * Cant be read using exsiting Reflection tool set, need to use Object.getOwnPopertySymbols() to access an Object’s symbols
 
-* Will never conflict with Object string keys
-
-* They are **Not Private** as all of the Symbols of an object can be derived by using Object.getOwnSymbols()
-
-* Symbols are not coercible into primitives.
-
-* Symbols are not always unique due to _`Symbol.far()`_ global registry
 
 
 ### Conclusion
