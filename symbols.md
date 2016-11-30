@@ -344,7 +344,7 @@ Thus `@@toPrimitive` method is used when an object interacts with a primitive ty
 * Different situations when an object is coerced to a primitive: String\(object\), Number\(object\), etc.
 
 ### _`@@toStringTag`_ to create the default description of an object
-To create a default string description of an object. 
+To create a default string description of an object to describe object type tag. It is used by the method Object.prototype.toString() by default
 
 When using `toString(<own class / object>)`
 
