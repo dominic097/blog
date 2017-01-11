@@ -23,7 +23,14 @@ let targetObj = {a:1, b:2, c:3},
     },
     proxyObj = new Proxy(targetObj, handler);
 
-    // Accessing
+    // Accessing targetObj Properties
+    targetObj.a // will return '1'
+    targetObj.b // will return '2'
+    
+    // NOTE: by accessing targetObj will not return the postfix text we added, since we're
+    //       acessing the non-proxified object
+    
+    
 ```
 
 
