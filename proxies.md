@@ -40,7 +40,7 @@ By the above example,
 
 * The proxy handlers _\(get & set\)_ each intercept the operation when a respective meta programming task is performed on the targetObj.
 * The `new Proxy()` invoke constructor of type intrinsic object _%FunctionPrototype%_ meaning, proxy is an exotic objects which do not have a \[\[Prototype\]\] internal slot that requires initialization.
-* Being said that proxy do not have prototype chain, proxyObj do have, 
+* Being said that proxy do not have prototype chain, proxyObj do have below intrinsic object, 
   * \[\[Handler\]\]    -&gt; Handler obj -&gt; has get & set trap function.
   * \[\[Target\]\]       -&gt; targetObj -&gt; has a,b,c properties.
   * \[\[IsRevoked\]  -&gt; By debaut false.  
