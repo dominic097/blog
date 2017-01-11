@@ -8,7 +8,7 @@ Proxies are lower level functionality introduced as a part of **ES6, **By that T
 
 Again as I described above, \_Proxies a\_bility to modify the default behavior of Javascript within itself is one of the ingredients that amuses me toward Javascript.
 
-Let's dig in with a popular example, getter \[\[get\]\] and setter \[\[set\]\]. which allows us to intercept get & set operations with custom behavior. 
+Let's dig in with a popular example, getter \[\[get\]\] and setter \[\[set\]\]. which allows us to intercept get & set operations with custom behavior.
 
 ```js
 let targetObj = {a:1, b:2, c:3},
@@ -22,9 +22,8 @@ let targetObj = {a:1, b:2, c:3},
         }        
     },
     proxyObj = new Proxy(targetObj, handler);
-    
-    // Accessing  
 
+    // Accessing
 ```
 
 
