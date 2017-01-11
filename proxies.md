@@ -28,14 +28,12 @@ let targetObj = {a:1, b:2, c:3},
     targetObj.b // will return '2'
 
     /** NOTE: by accessing targetObj will not return the postfix text we added, 
-    *   since we're acessing the non-proxified object. however by accessing
-    *   the proxyObj the o/p will be diffrent as shown below 
+    *   since we're acessing the non-proxied object. however by accessing
+    *   the proxyObj the o/p will be different as shown below 
     */
-    
+
     proxyObj.a // will return `1 from Proxy`
     proxyObj.d = 4 // will console `setting 4 @ d By Proxy set handler`
-    
-    
 ```
 
 
