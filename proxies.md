@@ -4,7 +4,9 @@ Proxies allow us to define JS objects in a way that were impossible before.
 
 ---
 
-Proxies are lower level functionality introduced as a part of **ES6, **By that They alter the default behaviour of Javascript by a wrapper function called **Traps** aka _Proxy handlers_. These handlers has an opportunity to perform extra logic on top of native function before forwarding to the original target/wrapped object.
+Proxies are lower level functionality introduced as a part of **ES6, **By that They alter the default behavior of Javascript by a wrapper function called **Traps** aka _Proxy handlers_. These handlers have an opportunity to perform extra logic on top of native function before forwarding to the original target/wrapped object.
 
-Again as I described above, _Proxies an_ Ability to modify the default behaviour of Javascript within itself is one of the ingredient that amuses me toward Javascript.
+Again as I described above, _Proxies a_bility to modify the default behavior of Javascript within itself is one of the ingredients that amuses me toward Javascript.
+
+Let's dig in with an popular example, getter \[\[get\]\] and setter \[\[set\]\]. which allows us to intercept get & set operations with custom behavior 
 
