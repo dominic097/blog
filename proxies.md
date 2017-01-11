@@ -49,3 +49,15 @@ By the above example,
 
 As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\]. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
 
+
+
+The below table shows the inrternal method's and it's respective Handler Method's which we will discuss brefily below,
+
+                                                                                 Table - Proxy Handler Methods
+
+| Internal Method | Handler Method |
+| :---: | :---: |
+|  |  |
+
+
+
