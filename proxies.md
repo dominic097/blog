@@ -53,7 +53,17 @@ The below table \[_Proxy Handler Methods_\] shows the inrternal method's and it'
 
 | Internal Method | Handler Method |
 | :---: | :---: |
-|  |  |
+| \[\[GetPrototypeOf\]\] | getPrototypeOf |
+| \[\[SetPrototypeOf\]\] | setPrototypeOf |
+| \[\[IsExtensible\]\] | isExtensible |
+| \[\[PreventExtensions\]\] | getOwnPropertyDescriptor |
+| \[\[HasProperty\]\] | has |
+| \[\[Get\]\] | get |
+| \[\[Set\]\] | set |
+| \[\[Delete\]\] | deleteProperty |
+| \[\[OwnPropertyKeys\]\] | ownKeys |
+| \[\[Call\]\] | apply |
+| \[\[Construct\]\] | construct |
 
 
 
