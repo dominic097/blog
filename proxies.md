@@ -149,40 +149,37 @@ let targetObj = {a:1, b:2, c:3},
 
 NOTE: _By the above implementation, we can only hide the properties of an Object that it holds, its value is still accessible._
 
-
-
 _**Binggo **_**!!!**  **some of the use cases for proxies**
 
 1. Tracing property accesses:
    Consider a naive example, where we wanna trace out all the properties of an Object that are accessed/modified. To demonstrate how that works, let’s create a class and trace accesses to the properties of an instance. 
-2. ```js
-   let targetObj = {a:1, b:2, c:3};
-       tracePropAccessFn = (target, props) => {
-       let propKeySet = new Set(...props);
-           return new Proxy(target, {
-               get(target, propKey, receiver) {
-                   if (propKeySet.has(propKey)) {
-                       console.log('GET '+propKey);
-                   }
-                   return Reflect.get(target, propKey, receiver); // If not Reflect can use target[propKey]
-               },
-               set(target, propKey, value, receiver) {
-                   if (propKeySet.has(propKey)) {
-                       console.log('SET '+propKey+' = '+value);
-                   }
-                   return Reflect.set(target, propKey, value, receiver);// If not Reflect can use target[propKey]
 
-               },
-           });
-       },
-       proxyObj = tracePropAccessFn(targetObj, Object.keys(targetObj));
-    
-       proxyObj.a // would console `GET` a & return value '1'
-    
-       proxyObj.a = 100; // would console `SET a = 100` & return '100'
+```js
+let targetObj = {a:1, b:2, c:3};  
+    tracePropAccessFn = (target, props) => {  
+    let propKeySet = new Set(...props);  
+        return new Proxy(target, {  
+            get(target, propKey, receiver) {  
+                if (propKeySet.has(propKey)) {  
+                    console.log('GET '+propKey);  
+                }  
+                return Reflect.get(target, propKey, receiver); // If not Reflect can use target[propKey]  
+            },  
+            set(target, propKey, value, receiver) {  
+                if (propKeySet.has(propKey)) {  
+                    console.log('SET '+propKey+' = '+value);  
+                }  
+                return Reflect.set(target, propKey, value, receiver);// If not Reflect can use target[propKey]
 
+            },
+        });
+    },
+    proxyObj = tracePropAccessFn(targetObj, Object.keys(targetObj));
 
-   ```
+    proxyObj.a // would console `GET` a & return value '1'
+
+    proxyObj.a = 100; // would console `SET a = 100` & return '100'
+```
 
 
 
