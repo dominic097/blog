@@ -36,8 +36,6 @@ let targetObj = {a:1, b:2, c:3},
     proxyObj.d = 4 // will console `setting 4 @d By Proxy set handler`
 ```
 
-
-
 By the above example,
 
 * The proxy handlers _\(get & set\)_ each intercept the operation when a respective meta-programming task is performed on the targetObj.
@@ -49,7 +47,7 @@ By the above example,
 
 **Proxy's Internal Method's and Internal Handler's**
 
-As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\]. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
+As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\] aka trap / handler hook function callbacks. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
 
 The below table \[_Proxy Handler Methods_\] shows the inrternal method's and it's respective Handler Method's which we will discuss briefly below,
 
@@ -66,6 +64,11 @@ The below table \[_Proxy Handler Methods_\] shows the inrternal method's and it'
 | \[\[OwnPropertyKeys\]\] | ownKeys |
 | \[\[Call\]\] | apply |
 | \[\[Construct\]\] | construct |
+| \[\[DefineOwnProperty\]\] | defineProperty |
+| \[\[Enumerate\]\] | enumerate |
+| \[\[GetOwnProperty\]\] | getOwnPropertyDescriptor |
+
+
 
 
 
