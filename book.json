@@ -10,5 +10,8 @@
             "token": "UA-88278648-2",
             "configuration": "auto"
         }
+    },
+    "structure": { 
+        "Symbols": "MetaProgramming/Symbols/symbols.md"
     }
 }
