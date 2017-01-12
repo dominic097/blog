@@ -102,5 +102,9 @@ let obj = Object.create(proxyObj);
 obj.a // console "1 from Proxy"
 ```
 
-By the above example, we have extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).
+By the above example, we have now extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).
+
+
+
+
 
