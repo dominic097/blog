@@ -123,10 +123,10 @@ let targetObj = {a:1, b:2, c:3},
         if (propertiesToHide.indexOf(property) != -1) {
           return false;
         }
-        return target[property]; // Best Method to use Reflect.has(target, property);
+        return target[property]; // Best Method use Reflect.has(target, property);
       },
       ownKeys(target) {
-        return Reflect.ownKeys(target).filter(
+        return Object.ownKeys(target).filter( // Best Method use Reflect.ownKeys..
           (property) => propertiesToHide.indexOf(property) == -1
         );
       },
@@ -134,7 +134,7 @@ let targetObj = {a:1, b:2, c:3},
         if (propertiesToHide.indexOf(property) != -1) {
           return undefined;
         }
-        return Object.getOwnPropertyDescriptor(target, property);// Best Method to use Reflect.getOwnPropert..
+        return Object.getOwnPropertyDescriptor(target, property);// Best Method use Reflect.getOwnPropertyDe..
       }
     },
     proxyObj = new Proxy(targetObj, handler);
