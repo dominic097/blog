@@ -208,22 +208,32 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
    In the fallowing example, we try to restrict the access of a property over the period of time to avoid race condition or to maintain atomicity in the current workflow. 
 
 4. ```js
-   let isLoaded = false,
-       data = new Proxy(target, {
+   let isLoaded = false, // Initially data is not loaded, hence set to 'false' by default
+       data = new Proxy({}, {
                    get(target, propKey, receiver) {
-                       if (!enabled) {
+                       if (!isLoaded) {
                            throw new TypeError('Revoked'); // return 'false' depending on the use-case
                        }
                        return Reflect.get(target, propKey, receiver);
                    },
                    has(target, propKey) {
-                       if (!enabled) {
+                       if (!isLoaded) {
                            throw new TypeError('Revoked'); // return 'false' depending on the use-case
                        }
                        return Reflect.has(target, propKey);
                    }
-           }),
-       
+           });
+       data.sampleProp; // Uncaught TypeError: Revoked. 
+       data.a // Uncaught TypeError: Revoked. 
+
+       $.ajax.onSuccess(err, res) {
+           res['sampleProp'] = "injecting sample prop value for testing"
+           data = res; // save ajax response into data Object 
+           isLoaded = true; // make Object accessible once data saved for further process         
+      }
+      
+      data.sampleProp // would print the value
+      data.a // return `undefined`
         
             
     
