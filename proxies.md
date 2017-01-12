@@ -240,5 +240,5 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
 
 ### Conclusion {#conclusion}
 
-Proxy, An Ability to modify itself is way cool, but should not be misused as a hack to accomplish certain tasks, a lot more can be accomplished as showed in examples above rather than just using only getter and setter. For instance, it could be used to build certain functionalities into a library or framework, or to make a special kind of objects to be used throughout your application. one such example as we have seen before is Revocable proxies which are useful for when we need to pass our objects to untrusted, third party code thus controlling the property access. Long live JavaScript !!!
+_Proxies_, An Ability to modify itself is way cool, but should not be misused as a hack to accomplish certain tasks, a lot more can be accomplished as showed in examples above rather than just using only getter and setter. For instance, it could be used to build certain functionalities into a library or framework, or to make a special kind of objects to be used throughout your application. one such example as we have seen before is Revocable proxies which are useful for when we need to pass our objects to untrusted, third party code thus controlling the property access. Long live JavaScript !!!
 
