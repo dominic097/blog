@@ -49,7 +49,7 @@ By the above example,
 
 As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\] aka trap / handler hook function callbacks. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
 
-The below table \[_Proxy Handler Methods_\] shows the internal method's and it's respective Handler Method's which we will discuss sample implementation later,
+The below table \[_Proxy Handler Methods_\] shows the internal method's and it's respective Handler Method's which we will discuss  with example implementation below,
 
 | Internal Method | Handler Method |
 | :---: | :---: |
@@ -104,8 +104,6 @@ obj.a // console "1 from Proxy"
 
 By the above example, we have now extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).
 
-
-
 **Using Proxies to hide all Object Properties **aka ** Encapsulation**
 
 We can use Proxies to make every property in an object completely hidden, except for when getting the value. Here’s all of the ways you can find out if a property exists on an Object in JavaScript:
@@ -114,6 +112,10 @@ We can use Proxies to make every property in an object completely hidden, except
 2. _Object.keys_/_Object.getOwnPropertyNames_, which uses \[\[**OwnPropertyKeys**\]\]. Proxy can trap this with `ownKeys`.
 3. _Object.entries _\(an upcoming ES2017 feature\), also uses \[\[**OwnPropertyKeys**\]\] - again - trapped by ownKeys.
 4. _Object.getOwnPropertyDescriptor_ which uses \[\[**GetOwnProperty**\]\]. Proxy can trap this with, surprise surprise, getOwnPropertyDescriptor.
+
+with the implenentaion , we can totally hide the properties of an Object. An Example
+
+
 
 
 
