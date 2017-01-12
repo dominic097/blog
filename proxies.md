@@ -155,7 +155,7 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
    Consider a naive example, where we wanna trace out all the properties of an Object that are accessed/modified. To demonstrate how that works, let’s create a class and trace accesses to the properties of an instance.
 
    ```js
-   let targetObj = {a:1, b:2, c:3};  
+   let targetObj = {a:1, b:2, c:3},
     tracePropAccessFn = (target, props) => {  
     let propKeySet = new Set(...props);  
         return new Proxy(target, {  
@@ -182,6 +182,22 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
    ```
 
 2. Tackling unknown properties:
+
+   An such example would be throwing an exception, If the accessed property doesn’t even exist in the prototype chain of an Object. 
+
+   ```js
+   let targetObj = {a:1, b:2, c:3},
+       propertyChecker = new Proxy({}, {
+            get(target, propKey, receiver) {
+               if (!(propKey in target)) {
+                   throw new ReferenceError('OOPS!!! Unknown property: ' + propKey);
+               }
+               return Reflect.get(target, propKey, receiver);
+           }
+       })
+   ```
+
+
 
 
 
