@@ -139,8 +139,12 @@ let targetObj = {a:1, b:2, c:3},
     },
     proxyObj = new Proxy(targetObj, handler);
     
-
-    propertiesToHide = []
+    Object.keys(proxyObj) // console ['b'];
+    proxyObj.hasOwnProperty('a') // would return false;
+    proxyObj.hasOwnProperty('b') // would return true;
+    
+    //To hide all prop's
+    propertiesToHide = Object.keys(proxyObj);
 ```
 
 
