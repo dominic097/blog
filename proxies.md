@@ -84,19 +84,17 @@ let targetObj = {a:1, b:2, c:3},
         }        
     },
     {proxy, revoke} = Proxy.revocable(targetObj, handler);
-    
+
     proxy.a; // console / return '1 from Proxy'
-    
+
     revoke(); // Revoking or Disabling proxy 
-    
+
     proxy.a // Uncaught TypeError: Cannot perform 'get' on a proxy that has been revoked at <anonymous>:1:6
 ```
 
-
-
 #### Proxies as prototypes {#proxies-as-prototypes}
 
-As we know Proxies don't have a prototype but it doesn't mean it can be used as a prototype,  By extending the above example with `targetObj` and `handler`  
+As we know Proxies don't have a prototype but it doesn't mean it can be used as a prototype,  By extending the above example with `targetObj` and `handler`
 
 ```js
 let obj = Object.create(proxyObj);
@@ -104,9 +102,5 @@ let obj = Object.create(proxyObj);
 obj.a // console "1 from Proxy"
 ```
 
-By the above example, we have extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).aspx)_._
-
-
-
-
+By the above example, we have extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).
 
