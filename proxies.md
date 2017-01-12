@@ -104,7 +104,7 @@ obj.a // console "1 from Proxy"
 
 By the above example, we have now extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).
 
-**Using Proxies to hide all Object Properties **
+**Using Proxies to hide all Properties **
 
 We can use Proxies to make every property in an object completely hidden, except for when getting the value. Here’s all of the ways you can find out if a property exists on an Object in JavaScript:
 
