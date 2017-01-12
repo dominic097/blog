@@ -143,9 +143,9 @@ let targetObj = {a:1, b:2, c:3},
     proxyObj.hasOwnProperty('a') // would return false;
     proxyObj.hasOwnProperty('b') // would return true;
     Object.getOwnPropertyNames(proxyObj) // would return ['b'];
-    
+
     proxyObj.a; // would return 1;
 ```
 
-NOTE: By the above implementation, we can only hide the properties of an Object it holds, it's value is still accessible.
+NOTE: By the above implementation, we can only hide the properties of an Object that it holds, it's value is still accessible.
 
