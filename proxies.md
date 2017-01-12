@@ -115,7 +115,13 @@ We can use Proxies to make every property in an object completely hidden, except
 
 with the implenentaion , we can totally hide the properties of an Object. An Example
 
-
+```js
+let propertiesToHide = [];
+let targetObj = {a:1, b:2, c:3},
+    handler = {
+        
+    }
+```
 
 
 
