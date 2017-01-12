@@ -234,9 +234,6 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
       
       data.sampleProp // would print the value
       data.a // return `undefined`
-        
-            
-    
 
    ```
 
