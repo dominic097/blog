@@ -3,7 +3,8 @@
         "blog-r24y",
         "es6tabs",
         "share",
-        "ga"
+        "ga",
+        "prism", "-highlight"
     ],
     "pluginsConfig": {
         "ga": {

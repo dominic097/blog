@@ -147,5 +147,5 @@ let targetObj = {a:1, b:2, c:3},
     proxyObj.a; // would return 1;
 ```
 
-NOTE: By the above implementation, we can only hide the properties of an Object that it holds, it's value is still accessible.
+NOTE: _By the above implementation, we can only hide the properties of an Object that it holds, it's value is still accessible._
 
