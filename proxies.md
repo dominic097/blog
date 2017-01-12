@@ -183,21 +183,25 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
 
 2. Tackling unknown properties:
 
-   An such example would be throwing an exception, If the accessed property doesn’t even exist in the prototype chain of an Object. 
+   An such example would be throwing an exception, If the accessed property doesn’t even exist in the prototype chain of an Object.
 
    ```js
-   let targetObj = {a:1, b:2, c:3},
-       propertyChecker = new Proxy({}, {
+   let propertyChecker = new Proxy({}, {
             get(target, propKey, receiver) {
                if (!(propKey in target)) {
                    throw new ReferenceError('OOPS!!! Unknown property: ' + propKey);
                }
-               return Reflect.get(target, propKey, receiver);
+               return Reflect.get(target, propKey, receiver);// If not Reflect can use target[propKey]
            }
-       })
+       });
+    
+       // Create all Object with property checker via explicit prototype.
+       let sampleObj = Object.create(propertyChecker);
+    
+       // Accessing non property of an object
+    
+       sampleObj.a // Uncaught ReferenceError:OOPS!!! Unknown property: a 
    ```
-
-
 
 
 
