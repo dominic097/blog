@@ -68,5 +68,45 @@ The below table \[_Proxy Handler Methods_\] shows the internal method's and it's
 | \[\[Enumerate\]\] | enumerate |
 | \[\[GetOwnProperty\]\] | getOwnPropertyDescriptor |
 
+### Creating a Revocable Proxies
+
+Besides creating common Proxies, we can also create temporary revocable proxies, which can be dismantle any time we want. To create a revocable Proxy, we need to use `Proxy.revocable(target, handler)` \(_instead of new Proxy\(target, handler\)_\), and instead of returning the Proxy directly, it’ll return an Object that would looks like `{ proxy, revoke()<Function> },` An Example,
+
+```js
+let targetObj = {a:1, b:2, c:3},
+    handler = {
+        get: (target, key, context) => {
+            return target[key] + ' from Proxy';
+        },
+        set: (target, key, value) => {
+            console.log("setting " + value + " @" + key + " By Proxy set handler");
+            target[key] = value;
+        }        
+    },
+    {proxy, revoke} = Proxy.revocable(targetObj, handler);
+    
+    proxy.a; // console / return '1 from Proxy'
+    
+    revoke(); // Revoking or Disabling proxy 
+    
+    proxy.a // Uncaught TypeError: Cannot perform 'get' on a proxy that has been revoked at <anonymous>:1:6
+```
+
+
+
+#### Proxies as prototypes {#proxies-as-prototypes}
+
+As we know Proxies don't have a prototype but it doesn't mean it can be used as a prototype,  By extending the above example with `targetObj` and `handler`  
+
+```js
+let obj = Object.create(proxyObj);
+
+obj.a // console "1 from Proxy"
+```
+
+By the above example, we have extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).aspx)_._
+
+
+
 
 
