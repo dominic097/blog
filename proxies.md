@@ -106,5 +106,14 @@ By the above example, we have now extended the object's Prototype using proxy ob
 
 
 
+**Using Proxies to hide all Object Properties **aka ** Encapsulation**
+
+We can use Proxies to make every property in an object completely hidden, except for when getting the value. Here’s all of the ways you can find out if a property exists on an Object in JavaScript:
+
+1. _Reflect.has_,_Object.hasOwnProperty_,_Object.prototype.hasOwnProperty_, and the _in_ operator all use \[\[**HasProperty**\]\]. Proxy can trap this with `has`.
+2. _Object.keys_/_Object.getOwnPropertyNames_, which uses \[\[**OwnPropertyKeys**\]\]. Proxy can trap this with `ownKeys`.
+3. _Object.entries _\(an upcoming ES2017 feature\), also uses \[\[**OwnPropertyKeys**\]\] - again - trapped by ownKeys.
+4. _Object.getOwnPropertyDescriptor_ which uses \[\[**GetOwnProperty**\]\]. Proxy can trap this with, surprise surprise, getOwnPropertyDescriptor.
+
 
 
