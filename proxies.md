@@ -194,14 +194,45 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
                return Reflect.get(target, propKey, receiver);// If not Reflect can use target[propKey]
            }
        });
-    
+
        // Create all Object with property checker via explicit prototype.
        let sampleObj = Object.create(propertyChecker);
-    
+
        // Accessing non property of an object
-    
-       sampleObj.a // Uncaught ReferenceError:OOPS!!! Unknown property: a 
+
+       sampleObj.a // Uncaught ReferenceError:OOPS!!! Unknown property:
    ```
+
+3. Restricting Access to Properties when needed / for a particular time:
+
+   In the fallowing example, we try to restrict the access of a property over the period of time to avoid race condition or to maintain atomicity in the current workflow. 
+
+4. ```js
+   let isLoaded = false,
+       data = new Proxy(target, {
+                   get(target, propKey, receiver) {
+                       if (!enabled) {
+                           throw new TypeError('Revoked'); // return 'false' depending on the use-case
+                       }
+                       return Reflect.get(target, propKey, receiver);
+                   },
+                   has(target, propKey) {
+                       if (!enabled) {
+                           throw new TypeError('Revoked'); // return 'false' depending on the use-case
+                       }
+                       return Reflect.has(target, propKey);
+                   }
+           }),
+       
+        
+            
+    
+
+   ```
+
+
+
+
 
 
 
