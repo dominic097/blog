@@ -119,7 +119,23 @@ with the implenentaion , we can totally hide the properties of an Object. An Exa
 let propertiesToHide = [];
 let targetObj = {a:1, b:2, c:3},
     handler = {
-        
+      has(object, property) {
+        if (propertiesToHide.indexOf(property) != -1) {
+          return false;
+        }
+        return Reflect.has(object, property);
+      },
+      ownKeys(object) {
+        return Reflect.ownKeys(object).filter(
+          (property) => propertiesToHide.indexOf(property) == -1
+        );
+      },
+      getOwnPropertyDescriptor(object, property) {
+        if (propertiesToHide.indexOf(property) != -1) {
+          return undefined;
+        }
+        return Reflect.getOwnPropertyDescriptor(object, property);
+      }
     }
 ```
 
