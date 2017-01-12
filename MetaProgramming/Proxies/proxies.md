@@ -47,9 +47,9 @@ By the above example,
 
 **Proxy's Internal Method's and Internal Handler's**
 
-As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\]. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
+As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\] aka trap / handler hook function callbacks. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
 
-The below table \[_Proxy Handler Methods_\] shows the inrternal method's and it's respective Handler Method's which we will discuss briefly below,
+The below table \[_Proxy Handler Methods_\] shows the internal method's and it's respective Handler Method's which we will discuss  with example implementation below,
 
 | Internal Method | Handler Method |
 | :---: | :---: |
@@ -64,6 +64,88 @@ The below table \[_Proxy Handler Methods_\] shows the inrternal method's and it'
 | \[\[OwnPropertyKeys\]\] | ownKeys |
 | \[\[Call\]\] | apply |
 | \[\[Construct\]\] | construct |
+| \[\[DefineOwnProperty\]\] | defineProperty |
+| \[\[Enumerate\]\] | enumerate |
+| \[\[GetOwnProperty\]\] | getOwnPropertyDescriptor |
 
+### Creating a Revocable Proxies
 
+Besides creating common Proxies, we can also create temporary revocable proxies, which can be dismantle any time we want. To create a revocable Proxy, we need to use `Proxy.revocable(target, handler)` \(_instead of new Proxy\(target, handler\)_\), and instead of returning the Proxy directly, it’ll return an Object that would looks like `{ proxy, revoke()<Function> },` An Example,
+
+```js
+let targetObj = {a:1, b:2, c:3},
+    handler = {
+        get: (target, key, context) => {
+            return target[key] + ' from Proxy';
+        },
+        set: (target, key, value) => {
+            console.log("setting " + value + " @" + key + " By Proxy set handler");
+            target[key] = value;
+        }        
+    },
+    {proxy, revoke} = Proxy.revocable(targetObj, handler);
+
+    proxy.a; // console / return '1 from Proxy'
+
+    revoke(); // Revoking or Disabling proxy 
+
+    proxy.a // Uncaught TypeError: Cannot perform 'get' on a proxy that has been revoked at <anonymous>:1:6
+```
+
+#### Proxies as prototypes {#proxies-as-prototypes}
+
+As we know Proxies don't have a prototype but it doesn't mean it can be used as a prototype,  By extending the above example with `targetObj` and `handler`
+
+```js
+let obj = Object.create(proxyObj);
+
+obj.a // console "1 from Proxy"
+```
+
+By the above example, we have now extended the object's Prototype using proxy object via [_Explicit Prototype_](https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94).
+
+**Using Proxies to hide all Properties **
+
+We can use Proxies to make every property in an object completely hidden, except for when getting the value. Here’s all of the ways you can find out if a property exists on an Object in JavaScript:
+
+1. _Reflect.has_,_Object.hasOwnProperty_,_Object.prototype.hasOwnProperty_, and the _in_ operator all use \[\[**HasProperty**\]\]. Proxy can trap this with `has`.
+2. _Object.keys_/_Object.getOwnPropertyNames_, which uses \[\[**OwnPropertyKeys**\]\]. Proxy can trap this with `ownKeys`.
+3. _Object.entries _\(an upcoming ES2017 feature\), also uses \[\[**OwnPropertyKeys**\]\] - again - trapped by ownKeys.
+4. _Object.getOwnPropertyDescriptor_ which uses \[\[**GetOwnProperty**\]\]. Proxy can trap this with, surprise surprise, getOwnPropertyDescriptor.
+
+with the implenentaion , we can totally hide the properties of an Object. An Example
+
+```js
+let propertiesToHide = ['a', 'c']; // To hide properties `a` and `c
+let targetObj = {a:1, b:2, c:3},
+    handler = {
+      has(target, property) {
+        if (propertiesToHide.indexOf(property) != -1) {
+          return false;
+        }
+        return Reflect.has(target, property);
+      },
+      ownKeys(target) {
+        return Reflect.ownKeys(target).filter(
+          (property) => propertiesToHide.indexOf(property) == -1
+        );
+      },
+      getOwnPropertyDescriptor(target, property) {
+        if (propertiesToHide.indexOf(property) != -1) {
+          return undefined;
+        }
+        return Reflect.getOwnPropertyDescriptor(target, property);
+      }
+    },
+    proxyObj = new Proxy(targetObj, handler);
+
+    Object.keys(proxyObj) // console ['b'];
+    proxyObj.hasOwnProperty('a') // would return false;
+    proxyObj.hasOwnProperty('b') // would return true;
+    Object.getOwnPropertyNames(proxyObj) // would return ['b'];
+
+    proxyObj.a; // would return 1;
+```
+
+NOTE: By the above implementation, we can only hide the properties of an Object that it holds, it's value is still accessible.
 
