@@ -1,6 +1,6 @@
 # Proxies
 
-Proxies allow us to define JS objects in a way that were impossible before.
+Proxies allow us to re-define JS in a way that is never possible before.
 
 ---
 
@@ -205,7 +205,7 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
 
 3. Restricting Access to Properties when needed / for a particular time:
 
-   In the fallowing example, we try to restrict the access of a property over the period of time to avoid race condition or to maintain atomicity in the current workflow. 
+   In the fallowing example, we try to restrict the access of a property over the period of time to avoid race condition or to maintain atomicity in the current workflow.
 
 4. ```js
    let isLoaded = false, // Initially data is not loaded, hence set to 'false' by default
@@ -231,15 +231,10 @@ _**Binggo **_**!!!**  **some of the use cases for proxies**
            data = res; // save ajax response into data Object 
            isLoaded = true; // make Object accessible once data saved for further process         
       }
-      
+
       data.sampleProp // would print the value
       data.a // return `undefined`
-
    ```
-
-
-
-
 
 
 
