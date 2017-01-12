@@ -123,7 +123,7 @@ let targetObj = {a:1, b:2, c:3},
         if (propertiesToHide.indexOf(property) != -1) {
           return false;
         }
-        return Reflect.has(target, property);
+        return target[property]; // Best Method to use Reflect.has(target, property);
       },
       ownKeys(target) {
         return Reflect.ownKeys(target).filter(
@@ -134,7 +134,7 @@ let targetObj = {a:1, b:2, c:3},
         if (propertiesToHide.indexOf(property) != -1) {
           return undefined;
         }
-        return Reflect.getOwnPropertyDescriptor(target, property);
+        return Object.getOwnPropertyDescriptor(target, property);// Best Method to use Reflect.getOwnPropert..
       }
     },
     proxyObj = new Proxy(targetObj, handler);
