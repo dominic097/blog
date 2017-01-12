@@ -136,7 +136,9 @@ let targetObj = {a:1, b:2, c:3},
         }
         return Reflect.getOwnPropertyDescriptor(target, property);
       }
-    }
+    },
+    proxyObj = new Proxy(targetObj, handler);
+  
 ```
 
 
