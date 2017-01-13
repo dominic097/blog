@@ -168,8 +168,10 @@ Reflect.isExtensible(Obj); // === true
 // ...but that can be changed.
 Reflect.preventExtensions(Obj);
 Reflect.isExtensible(Obj); // === false
+
 Obj.y = 1;
 console.log(Obj); // would print {x:1}
+
 // The difference
 Reflect.preventExtensions(1);// TypeError: 1 is not an object
 Object.preventExtensions(1); // would return 1
