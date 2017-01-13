@@ -102,7 +102,7 @@ Object.getOwnPropertyDescriptor('foo', 'f'); // would return just 'undefined'
 
 #### Reflect.has`( target, propertyKey )`
 
-Reflect.has is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property. An Example 
+Reflect.has is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property. An Example
 
 ```js
 Reflect.has({x: 0}, "x"); // true
@@ -110,8 +110,6 @@ Reflect.has({x: 0}, "y"); // false
 
 // returns true for properties in the prototype chain 
 Reflect.has({x;0}, "toString"); // true
-
-
 ```
 
 
