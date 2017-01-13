@@ -8,7 +8,7 @@ In JS6 MP can be achieved with
 
 * ##### [Symbols](https://dominic097.github.io/blog/symbols.html "Click to know more on Symbols in JavaScript")
 * ##### [Proxies](https://dominic097.github.io/blog/proxies.html "Click to know more on Proxies in JavaScript")
-* ##### Reflections(https://dominic097.github.io/blog/reflections.html "Click to know more on Proxies in JavaScript")
+* ##### [Reflections](https://dominic097.github.io/blog/reflections.html "Click to know more on Proxies in JavaScript")
 
 # [Symbols](https://dominic097.github.io/blog/symbols.html "Click to know more on Symbols in JavaScript")
 
