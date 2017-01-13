@@ -68,10 +68,9 @@ var result = Reflect.construct(Array, [], someConstructor);
 
 Reflect.getPrototypeOf(result); // someConstructor.prototype
 Array.isArray(result); // true
-
 ```
 
-Thus with the help of Reflect.construct we not only attain subclassing inheritance but also a neat code structure which can easily blunt with modern code practice  
+Thus with the help of Reflect.construct we not only attain subclassing inheritance but also a neat code structure which can easily blunt with modern code practice.
 
 
 
