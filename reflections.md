@@ -179,3 +179,17 @@ Object.preventExtensions(1); // would return 1
 
 
 
+#### Reflect.getPrototypeOf `( target )`
+
+Again, The Static method _Reflect.getPrototypeOf\(\) _is same as _Object.getPrototypeOf\(\)_. It returns the prototype \(i.e. the value of the internal \[\[**Prototype**\]\] property\) of the specified object. An Example, 
+
+```js
+Reflect.getPrototypeOf({}); // Object.prototype
+
+class Auto {}
+
+Reflect.getPrototypeOf(new Auto()) == Auto.prototype; // True
+```
+
+
+
