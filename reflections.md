@@ -102,7 +102,7 @@ Object.getOwnPropertyDescriptor('foo', 'f'); // would return just 'undefined'
 
 #### Reflect.has`( target, propertyKey )`
 
-Reflect.has is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property. An Example,
+_Reflect.has_ is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property. An Example,
 
 ```js
 Reflect.has({x: 0}, "x"); // true
@@ -114,7 +114,7 @@ Reflect.has({x;0}, "toString"); // true
 
 #### Reflect.get`(target, propertyKey[, receiver])`
 
-Reflect.get method works like getting a property from an object \(target\[propertyKey\]\) as a function. An Example,
+_Reflect.get_ method works like getting a property from an object \(target\[propertyKey\]\) as a function. An Example,
 
 ```js
 // Object
@@ -127,7 +127,7 @@ Reflect.get(["zero", "one"], 1); // "one"
 
 #### Reflect.set`(target, propertyKey, value[, receiver])`
 
-Reflect.set method works like setting a property on an object. An Example,
+_Reflect.set_ method works like setting a property on an object. An Example,
 
 ```js
 // Object
@@ -143,7 +143,7 @@ arr[2]; // "goose"
 
 #### Reflect.ownKeys`(target)`
 
-Reflect.ownKeys\(\) method wroks similar like Object.Keys\(\) returns an array of the target object's own property keys. An Example,
+_Reflect.ownKeys_ method wroks similar like Object.Keys\(\) returns an array of the target object's own property keys. An Example,
 
 ```js
 Reflect.ownKeys({z: 3, y: 2, x: 1}); // [ "z", "y", "x" ]
@@ -155,6 +155,14 @@ let right = Symbol.for("RIGHT");
 
 let obj = {left: 'left Node', right: 'right node, node: 1};
 Reflect.ownKeys(obj); // [Symbol(LEFT), Symbol(RIGHT), "node"]
+```
+
+#### Reflect.preventExtensions\(\) 
+
+The static _Reflect.preventExtensions\(\)_ method prevents new properties from ever being added to an object similar to _Object.preventExtensions\(\) _with an diffrence Reflect.preventExtensions can not be used against non-object value which is not the case with Object.preventExtensions. An Example,
+
+```js
+
 ```
 
 
