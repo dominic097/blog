@@ -14,7 +14,11 @@ _**Just Making things cleare !!!**_
 * Reflect Object doesn't have a \[\[Call\]\] internal method
 * It is not possible to invoke Reflect Object as a functional method
 
-The fallowing are the static functions that Reflection Object provides, It has the same names as the proxy handler methods where some of them are same as corresponding methods on Object. 
+The fallowing are the static functions that Reflection Object provides, It has the same names as the proxy handler methods where some of them are same as corresponding methods on Object.
+
+#### Reflect.apply \( target, thisArgument, argumentsList \)
+
+
 
 
 
