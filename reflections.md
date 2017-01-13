@@ -112,5 +112,18 @@ Reflect.has({x: 0}, "y"); // false
 Reflect.has({x;0}, "toString"); // true
 ```
 
+#### Reflect.get`(target, propertyKey[, receiver])`
+
+Reflect.get method works like getting a property from an object \(target\[propertyKey\]\) as a function. An Example 
+
+```js
+// Object
+var obj = { a: 1, b: 2 };
+Reflect.get(obj, "a"); // 1
+
+// Array
+Reflect.get(["zero", "one"], 1); // "one"
+```
+
 
 
