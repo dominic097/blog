@@ -12,7 +12,7 @@ _**Just Making things clear !!!**_
 * Reflect doesn't have a \[\[Construct\]\] internal method
 * It is not possible to use the Reflect Object with the `new`  Operatior
 * Reflect Object doesn't have a \[\[Call\]\] internal method
-* It is not possible to invoke Reflect Object as a functional method_\_\__
+* It is not possible to invoke Reflect Object as a functional method_\_\_\_
 
 ---
 
