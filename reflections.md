@@ -31,7 +31,7 @@ But, this is still not a cleaner way. With Reflect.apply which is pretty much li
 ```js
 Reflect.apply(sumFn, null, [1,2,3,4]) === 10;
 ```
-That beign said, It is mind blowing! how Reflect.appy can protect us from pitfall of _Function#**apply** / Function#**call**_ where any code could trivially change the functionalities of **_call_** or **_apply_** method leaving us stuck wiht broken code or horrible workarounds.
+That beign said, It is mind blowing! how Reflect.appy is less verbose and most importanlty it protect us from pitfall of _Function#**apply** / Function#**call**_ where any code could trivially change the functionalities of **_call_** or **_apply_** method leaving us stuck wiht broken code or horrible workarounds.
 
 ________
 
