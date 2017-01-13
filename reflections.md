@@ -16,7 +16,7 @@ _**Just Making things clear !!!**_
 ____
 The fallowing are the static functions that Reflection Object provides, It has the same names as the proxy handler methods where some of them are same as corresponding methods on Object.
 
-#### Reflect.apply \( target, thisArgument, argumentsList \)
+#### Reflect.apply `( target, thisArgument, argumentsList )`
 
 In ES5, we would typically use the `Function.prototype.apply` method to call function a function with a given context and arguments provided as Array with the below example 
 
