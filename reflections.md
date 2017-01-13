@@ -172,6 +172,7 @@ Obj.y = 1;
 console.log(Obj); // would print {x:1}
 // The difference
 Reflect.preventExtensions(1);// TypeError: 1 is not an object
+Object.preventExtensions(1); // would return 1
 ```
 
 
