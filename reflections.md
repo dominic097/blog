@@ -72,11 +72,9 @@ Array.isArray(result); // true
 
 Thus with the help of Reflect.construct we not only attain subclassing inheritance but also a neat code structure which can easily blunt with modern code practice.
 
-
-
 #### Reflect.defineProperty `( target, propertyKey, attributes )`
 
-Reflect.defineProperty\(\) method is like Object.defineProperty\(\) which lets you to define metedata about the property. but returns a Boolean.  _NOTE: _Throws a _**TypeError **_is if target is not an Object. An Example,
+Reflect.defineProperty\(\) method is like Object.defineProperty\(\) which lets you to define metedata about the property. but returns a Boolean.  _NOTE: \_Throws a _**TypeError **\_is if target is not an Object. An Example,
 
 ```js
 var obj = {};
@@ -84,11 +82,7 @@ Reflect.defineProperty(obj, "x", {value: 7}); // true
 obj.x; // 7
 ```
 
-
-
 #### Reflect.getOwnPropertyDescriptor `( target, propertyKey )`
 
-
-
-
+This, once again, pretty much replaces `Object.getOwnPropertyDescriptor,` getting the descriptor metadata of a property if it exists on the object, undefined otherwise.
 
