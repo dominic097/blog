@@ -40,5 +40,20 @@ Reflect.apply(sumFn, null, [1,2,3,4]) === 10;
 
 That being said, It is mind blowing! how Reflect.appy is less verbose and most importantly it protect us from the pitfalls of _Function\#**apply** / Function\#**call**_ where any code could trivially change the functionalities of _**call**_ or _**apply**_ method leaving us stuck wiht broken code or horrible workarounds.
 
+#### Reflect.construct `(target, argumentsList[, newTarget])`
+
+A static method which act like the _`new`_ operator as a function. It is equivalent to calling new target\(...args\). This will work with Classes, and sets up the correct object so that Constructors have the right this object with the matching prototype. In ES5 we would use `Object.create() `instead and pass that to _**apply**_ or _**call**_ methods. An Example,
+
+```js
+class Auto {
+    constructor(model) {
+        this.model = model;
+    }
+    getModelNumber() {
+        return "Brand VW: Model: " + this.model;
+    }    
+}
+```
+
 
 
