@@ -1,0 +1,433 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Reflections · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="proxies.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Meta Programming
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="symbols.html">
+            
+                <a href="symbols.html">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="proxies.html">
+            
+                <a href="proxies.html">
+            
+                    
+                    Proxies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.3" data-path="reflections.html">
+            
+                <a href="reflections.html">
+            
+                    
+                    Reflections
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Reflections</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="reflections">Reflections</h1>
+<p>An non-construct built-in object that provides methods for interceptable JavaScript operations</p>
+<hr>
+<p>Reflections are all about Reflection through introspection - used to discover very low-level information about your code helping with forwarding default operations from the handler to the target. It goes hand in hand with proxies which is all about Reflection through intercession - wrapping Object and intercepting their behavior through traps.</p>
+<p>The fallowing are the static functions that Reflection Object provides, It has the same names as the proxy handler methods where some of them are same as corresponding methods on Object.</p>
+<h4 id="reflectapply--target-thisargument-argumentslist-">Reflect.apply <code>( target, thisArgument, argumentsList )</code></h4>
+<p>In ES5, we would typically use the <code>Function.prototype.apply</code> method to call function a function with a given context and arguments provided as Array with the below example</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Function</span>.prototype.apply.call(sumFn, <span class="hljs-literal">null</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]) === <span class="hljs-number">10</span>;
+</code></pre>
+<p>Which is horrible, However we call also do,</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Function</span>.prototype.apply.call(sumFn, <span class="hljs-literal">null</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]) === <span class="hljs-number">10</span>;
+</code></pre>
+<p>But, this is still not a cleaner way. With Reflect.apply which is pretty much like <em>Function#<strong>apply</strong> / Function#<strong>call</strong></em> statement</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Reflect</span>.apply(sumFn, <span class="hljs-literal">null</span>, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>]) === <span class="hljs-number">10</span>;
+</code></pre>
+<p>That being said, It is mind blowing! how Reflect.appy is less verbose and most importantly it protect us from the pitfalls of <em>Function#<strong>apply</strong> / Function#<strong>call</strong></em> where any code could trivially change the functionalities of <em><strong>call</strong></em> or <em><strong>apply</strong></em> method leaving us stuck wiht broken code or horrible workarounds.</p>
+<h4 id="reflectconstruct-target-argumentslist-newtarget">Reflect.construct <code>(target, argumentsList[, newTarget])</code></h4>
+<p>A static method which act like the <code>new</code> operator as a function. It is equivalent to calling new target(...args). This will work with Classes, and sets up the correct object so that Constructors have the right this object with the matching prototype. In ES5 we would use <code>Object.create()</code>instead and pass that to <em><strong>apply</strong></em> or <em><strong>call</strong></em> methods. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Auto</span> </span>{
+    <span class="hljs-keyword">constructor</span>(model) {
+        <span class="hljs-keyword">this</span>.model = model;
+    }
+    getModelNumber() {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Brand VW: Model: &quot;</span> + <span class="hljs-keyword">this</span>.model;
+    }    
+}
+
+<span class="hljs-comment">//ES5 factory  method implementation</span>
+<span class="hljs-keyword">let</span> instance = <span class="hljs-built_in">Object</span>.create(Auto.prototype); <span class="hljs-comment">// creating a factory </span>
+instance.getModelNumber.call({model:<span class="hljs-string">&quot;Pollo&quot;</span>}); <span class="hljs-comment">// would print &quot;Brand VW: Model: Pollo&quot;</span>
+
+<span class="hljs-comment">//ES6 using Reflect</span>
+<span class="hljs-keyword">let</span> instanceByReflect = <span class="hljs-built_in">Reflect</span>.construct(Auto, [<span class="hljs-string">&quot;Pollo&quot;</span>]); <span class="hljs-comment">//creating facory</span>
+instanceByReflect.getModelNumber(); <span class="hljs-comment">// would print &quot;Brand VW: Model: Pollo&quot;</span>
+
+<span class="hljs-comment">//Applying Reflect to achive sub-classing technique</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">someConstructor</span>(<span class="hljs-params"></span>) </span>{}
+<span class="hljs-keyword">var</span> result = <span class="hljs-built_in">Reflect</span>.construct(<span class="hljs-built_in">Array</span>, [], someConstructor);
+
+<span class="hljs-built_in">Reflect</span>.getPrototypeOf(result); <span class="hljs-comment">// someConstructor.prototype</span>
+<span class="hljs-built_in">Array</span>.isArray(result); <span class="hljs-comment">// true</span>
+</code></pre>
+<p>Thus with the help of Reflect.construct we not only attain subclassing inheritance but also a neat code structure which can easily blunt with modern code practice.</p>
+<h4 id="reflectdefineproperty--target-propertykey-attributes-">Reflect.defineProperty <code>( target, propertyKey, attributes )</code></h4>
+<p>Reflect.defineProperty() method is like Object.defineProperty() which lets you to define metedata about the property. but returns a Boolean.  <em>NOTE: _Throws a </em><strong>TypeError </strong>_is if target is not an Object. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> obj = {};
+<span class="hljs-built_in">Reflect</span>.defineProperty(obj, <span class="hljs-string">&quot;x&quot;</span>, {value: <span class="hljs-number">7</span>}); <span class="hljs-comment">// true</span>
+obj.x; <span class="hljs-comment">// 7</span>
+</code></pre>
+<h4 id="reflectgetownpropertydescriptor--target-propertykey-">Reflect.getOwnPropertyDescriptor <code>( target, propertyKey )</code></h4>
+<p>This, once again, pretty much replaces <code>Object.getOwnPropertyDescriptor,</code> getting the descriptor metadata of a property if it exists on the object, undefined otherwise. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Reflect</span>.getOwnPropertyDescriptor(obj, <span class="hljs-string">&quot;x&quot;</span>);
+<span class="hljs-comment">// would return Object {value: 7, writable: false, enumerable: false, configurable: false}</span>
+</code></pre>
+<p>The <em>Reflect.getOwnPropertyDescriptor</em> intern calls the <em>Object.getOwnPropertyDescriptor</em> but the difference is,</p>
+<pre><code class="lang-js"><span class="hljs-comment">// would return Uncaught TypeError: Reflect.getOwnPropertyDescriptor called on non-object</span>
+<span class="hljs-built_in">Reflect</span>.getOwnPropertyDescriptor(<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;f&apos;</span>);
+
+<span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;f&apos;</span>); <span class="hljs-comment">// would return just &apos;undefined&apos;</span>
+</code></pre>
+<h4 id="reflecthas-target-propertykey-">Reflect.has<code>( target, propertyKey )</code></h4>
+<p><em>Reflect.has</em> is an interesting one, because it is essentially the same functionality as the in operator (outside of a loop). Both use the [[<strong>HasProperty</strong>]] internal method and returns an Boolean indicating whether or not the target has the property. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Reflect</span>.has({x: <span class="hljs-number">0</span>}, <span class="hljs-string">&quot;x&quot;</span>); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">Reflect</span>.has({x: <span class="hljs-number">0</span>}, <span class="hljs-string">&quot;y&quot;</span>); <span class="hljs-comment">// false</span>
+
+<span class="hljs-comment">// returns true for properties in the prototype chain </span>
+<span class="hljs-built_in">Reflect</span>.has({x;<span class="hljs-number">0</span>}, <span class="hljs-string">&quot;toString&quot;</span>); <span class="hljs-comment">// true</span>
+</code></pre>
+<h4 id="reflectgettarget-propertykey-receiver">Reflect.get<code>(target, propertyKey[, receiver])</code></h4>
+<p><em>Reflect.get</em> method works like getting a property from an object (target[propertyKey]) as a function. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-comment">// Object</span>
+<span class="hljs-keyword">var</span> obj = { a: <span class="hljs-number">1</span>, b: <span class="hljs-number">2</span> };
+<span class="hljs-built_in">Reflect</span>.get(obj, <span class="hljs-string">&quot;a&quot;</span>); <span class="hljs-comment">// 1</span>
+
+<span class="hljs-comment">// Array</span>
+<span class="hljs-built_in">Reflect</span>.get([<span class="hljs-string">&quot;zero&quot;</span>, <span class="hljs-string">&quot;one&quot;</span>], <span class="hljs-number">1</span>); <span class="hljs-comment">// &quot;one&quot;</span>
+</code></pre>
+<h4 id="reflectsettarget-propertykey-value-receiver">Reflect.set<code>(target, propertyKey, value[, receiver])</code></h4>
+<p><em>Reflect.set</em> method works like setting a property on an object. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-comment">// Object</span>
+<span class="hljs-keyword">var</span> obj = {};
+<span class="hljs-built_in">Reflect</span>.set(obj, <span class="hljs-string">&quot;prop&quot;</span>, <span class="hljs-string">&quot;value&quot;</span>); <span class="hljs-comment">// true</span>
+obj.prop; <span class="hljs-comment">// &quot;value&quot;</span>
+
+<span class="hljs-comment">// Array</span>
+<span class="hljs-keyword">var</span> arr = [<span class="hljs-string">&quot;duck&quot;</span>, <span class="hljs-string">&quot;duck&quot;</span>, <span class="hljs-string">&quot;duck&quot;</span>];
+<span class="hljs-built_in">Reflect</span>.set(arr, <span class="hljs-number">2</span>, <span class="hljs-string">&quot;goose&quot;</span>); <span class="hljs-comment">// true</span>
+arr[<span class="hljs-number">2</span>]; <span class="hljs-comment">// &quot;goose&quot;</span>
+</code></pre>
+<h4 id="reflectownkeystarget">Reflect.ownKeys<code>(target)</code></h4>
+<p><em>Reflect.ownKeys</em> method wroks similar like Object.Keys() returns an array of the target object&apos;s own property keys. An Example,</p>
+<pre><code class="lang-js">Reflect.ownKeys({z: 3, y: 2, x: 1}); // [ &quot;z&quot;, &quot;y&quot;, &quot;x&quot; ]
+Reflect.ownKeys([]); // [&quot;length&quot;]
+
+//Working with Symbols 
+let left = Symbol.for(&quot;LEFT&quot;);
+let right = Symbol.for(&quot;RIGHT&quot;);
+
+let obj = {left: &apos;left Node&apos;, right: &apos;right node, node: 1};
+Reflect.ownKeys(obj); // [Symbol(LEFT), Symbol(RIGHT), &quot;node&quot;]
+</code></pre>
+<h4 id="reflectpreventextensions">Reflect.preventExtensions()</h4>
+<p>The static <em>Reflect.preventExtensions()</em> method prevents new properties from ever being added to an object similar to _Object.preventExtensions() _with an diffrence Reflect.preventExtensions can not be used against non-object value which is not the case with Object.preventExtensions. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Obj = {x:<span class="hljs-number">1</span>};
+<span class="hljs-built_in">Reflect</span>.isExtensible(Obj); <span class="hljs-comment">// === true</span>
+
+<span class="hljs-comment">// ...but that can be changed.</span>
+<span class="hljs-built_in">Reflect</span>.preventExtensions(Obj);
+<span class="hljs-built_in">Reflect</span>.isExtensible(Obj); <span class="hljs-comment">// === false</span>
+
+Obj.y = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(Obj); <span class="hljs-comment">// would print {x:1}</span>
+
+<span class="hljs-comment">// The difference</span>
+<span class="hljs-built_in">Reflect</span>.preventExtensions(<span class="hljs-number">1</span>);<span class="hljs-comment">// TypeError: 1 is not an object</span>
+<span class="hljs-built_in">Object</span>.preventExtensions(<span class="hljs-number">1</span>); <span class="hljs-comment">// would return 1</span>
+</code></pre>
+<h4 id="reflectgetprototypeof--target-">Reflect.getPrototypeOf <code>( target )</code></h4>
+<p>Again, The Static method <em>Reflect.getPrototypeOf() _is same as _Object.getPrototypeOf()</em>. It returns the prototype (i.e. the value of the internal [[<strong>Prototype</strong>]] property) of the specified object. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-built_in">Reflect</span>.getPrototypeOf({}); <span class="hljs-comment">// Object.prototype</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Auto</span> </span>{}
+
+<span class="hljs-built_in">Reflect</span>.getPrototypeOf(<span class="hljs-keyword">new</span> Auto()) == Auto.prototype; <span class="hljs-comment">// True</span>
+</code></pre>
+<h4 id="reflectsetprototypeof--target-proto-">Reflect.setPrototypeOf <code>( target, proto )</code></h4>
+<p>Of course, we wouldn&#x2019;t have <em>getPrototypeOf</em> without <em>setPrototypeOf</em>. <em>Reflect.setPrototypeOf</em> is much more basic - if it receives a non-object it&#x2019;ll throw a <em>TypeError</em>, but other than that, It sets the prototype (i.e., the internal [[Prototype]] property) of a specified object to another object or to null and return the result of [[<strong>SetPrototypeOf</strong>]] - which is a Boolean indicating if operation was successful. An Example,</p>
+<pre><code class="lang-js"><span class="hljs-comment">// consider the Auto example,</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Auto</span> </span>{...}
+<span class="hljs-keyword">let</span> instance = <span class="hljs-keyword">new</span> Auto(<span class="hljs-string">&quot;Pollo&quot;</span>);
+
+<span class="hljs-built_in">Reflect</span>.setPrototypeOf(instance, <span class="hljs-built_in">Array</span>.prototype); <span class="hljs-comment">// Applying Array.prototype to Auto Instance</span>
+
+<span class="hljs-comment">// It can change an object&apos;s [[Prototype]] to null.</span>
+<span class="hljs-built_in">Reflect</span>.setPrototypeOf({}, <span class="hljs-literal">null</span>); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// Returns false if target is not extensible.</span>
+<span class="hljs-built_in">Reflect</span>.setPrototypeOf(<span class="hljs-built_in">Object</span>.freeze({}), <span class="hljs-literal">null</span>); <span class="hljs-comment">// false</span>
+
+<span class="hljs-comment">//The Diffrence</span>
+<span class="hljs-built_in">Object</span>.setPrototypeOf(<span class="hljs-number">1</span>); <span class="hljs-comment">// Uncaught TypeError: Object prototype may only be an Object or null: undefined</span>
+<span class="hljs-built_in">Reflect</span>.setPrototypeOf(<span class="hljs-number">1</span>); <span class="hljs-comment">//VM1841:1 Uncaught TypeError: Reflect.setPrototypeOf called on non-object</span>
+</code></pre>
+<p><em><strong>Just Making things clear !!!</strong></em></p>
+<ul>
+<li>Reflect is not a functional Object</li>
+<li>Reflect doesn&apos;t have a [[Construct]] internal method</li>
+<li>It is not possible to use the Reflect Object with the <code>new</code>  Operatior</li>
+<li>Reflect Object doesn&apos;t have a [[Call]] internal method</li>
+<li>It is not possible to invoke Reflect Object as a functional method</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>Meta Programming an ability to examine, introspect, and modify its own structure and behavior at runtime. Thus JavaScript being a dynamic language, the Proxies and Reflection gives the flexibility to achieve what is needed and its Obvious that we have barely scratched the surface of MP the best is yet to come. Long live JavaScript !!!</p>
+<div class="gitbook-share"></div>
+
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="proxies.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Proxies">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Reflections","level":"1.1.3","depth":2,"previous":{"title":"Proxies","level":"1.1.2","depth":2,"path":"proxies.md","ref":"proxies.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"/home/dominic/workspace/Git/blog/node_modules/gitbook-plugin-blog-r24y/theme","variables":{},"plugins":["blog-r24y","es6tabs","share","ga"],"pluginsConfig":{"es6tabs":{"presets":["es2015","react"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"blog-r24y":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-88278648-2"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"share":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"reflections.md","mtime":"2017-01-13T12:16:21.148Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T12:24:40.177Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-share/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

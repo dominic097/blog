@@ -1,0 +1,546 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Proxies · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="styles/website.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="reflections.html" />
+    
+    
+    <link rel="prev" href="symbols.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Meta Programming
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="symbols.html">
+            
+                <a href="symbols.html">
+            
+                    
+                    Symbols
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.1.2" data-path="proxies.html">
+            
+                <a href="proxies.html">
+            
+                    
+                    Proxies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.3" data-path="reflections.html">
+            
+                <a href="reflections.html">
+            
+                    
+                    Reflections
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Proxies</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="proxies">Proxies</h1>
+<p>Proxies allow us to re-define JS in a way that is never possible before.</p>
+<hr>
+<p>Proxies are lower level functionality introduced as a part of <strong>ES6, </strong>By that They alter the default behavior of Javascript by a wrapper function called <strong>Traps</strong> aka <em>Proxy handlers</em>. These handlers have an opportunity to perform extra logic on top of native function before forwarding to the original target/wrapped object.</p>
+<p>Again as I described above, Proxies a bility to modify the default behavior of Javascript within itself is one of the ingredients that amuses me toward Javascript.</p>
+<p>Let&apos;s dig in with a popular example, getter [[get]] and setter [[set]]. which allows us to intercept get &amp; set operations with custom behavior.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> targetObj = {a:<span class="hljs-number">1</span>, b:<span class="hljs-number">2</span>, c:<span class="hljs-number">3</span>},
+    handler = {
+        get: (target, key, context) =&gt; {
+            <span class="hljs-keyword">return</span> target[key] + <span class="hljs-string">&apos; from Proxy&apos;</span>;
+        },
+        set: (target, key, value) =&gt; {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;setting &quot;</span> + value + <span class="hljs-string">&quot; @&quot;</span> + key + <span class="hljs-string">&quot; By Proxy set handler&quot;</span>);
+            target[key] = value;
+        }        
+    },
+    proxyObj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(targetObj, handler);
+
+    <span class="hljs-comment">// Accessing targetObj Properties</span>
+    targetObj.a <span class="hljs-comment">// will return &apos;1&apos;</span>
+    targetObj.b <span class="hljs-comment">// will return &apos;2&apos;</span>
+
+    <span class="hljs-comment">/** <span class="hljs-doctag">NOTE:</span> by accessing targetObj will not return the postfix text we added, 
+    *   since we&apos;re acessing the non-proxied object. however by accessing
+    *   the proxyObj the o/p will be different as shown below 
+    */</span>
+
+    proxyObj.a <span class="hljs-comment">// will return `1 from Proxy`</span>
+    proxyObj.d = <span class="hljs-number">4</span> <span class="hljs-comment">// will console `setting 4 @d By Proxy set handler`</span>
+</code></pre>
+<p>By the above example,</p>
+<ul>
+<li>The proxy handlers <em>(get &amp; set)</em> each intercept the operation when a respective meta-programming task is performed on the targetObj.</li>
+<li>The <code>new Proxy()</code> invoke constructor of type intrinsic object <em>%FunctionPrototype%</em> meaning, proxy is an exotic objects which do not have a [[Prototype]] internal slot that requires initialization.</li>
+<li>Being said that proxy do not have prototype chain, proxyObj do have below intrinsic object, <ul>
+<li>[[Handler]]    -&gt; Handler obj -&gt; has get &amp; set trap function.</li>
+<li>[[Target]]       -&gt; targetObj -&gt; has a,b,c properties.</li>
+<li>[[IsRevoked]  -&gt; By debaut false.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Proxy&apos;s Internal Method&apos;s and Internal Handler&apos;s</strong></p>
+<p>As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called [[ProxyHandler]] aka trap / handler hook function callbacks. The value of [[<strong>ProxyHandler</strong>]] is an object, called the proxy&#x2019;s handler object or <strong>null </strong>by default. Every proxy object also has an internal slot called [[<strong>ProxyTarget</strong>]] whose value is either an object or <strong>null </strong>value. This object is called the proxy&#x2019;s target object as in our case it&apos;s <em>targetObj</em> as per above example.</p>
+<p>The below table [<em>Proxy Handler Methods</em>] shows the internal method&apos;s and it&apos;s respective Handler Method&apos;s where some of them will be implemented in upcoming examples,</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Internal Method</th>
+<th style="text-align:center">Handler Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[[GetPrototypeOf]]</td>
+<td style="text-align:center">getPrototypeOf</td>
+</tr>
+<tr>
+<td style="text-align:center">[[SetPrototypeOf]]</td>
+<td style="text-align:center">setPrototypeOf</td>
+</tr>
+<tr>
+<td style="text-align:center">[[IsExtensible]]</td>
+<td style="text-align:center">isExtensible</td>
+</tr>
+<tr>
+<td style="text-align:center">[[PreventExtensions]]</td>
+<td style="text-align:center">getOwnPropertyDescriptor</td>
+</tr>
+<tr>
+<td style="text-align:center">[[HasProperty]]</td>
+<td style="text-align:center">has</td>
+</tr>
+<tr>
+<td style="text-align:center">[[Get]]</td>
+<td style="text-align:center">get</td>
+</tr>
+<tr>
+<td style="text-align:center">[[Set]]</td>
+<td style="text-align:center">set</td>
+</tr>
+<tr>
+<td style="text-align:center">[[Delete]]</td>
+<td style="text-align:center">deleteProperty</td>
+</tr>
+<tr>
+<td style="text-align:center">[[OwnPropertyKeys]]</td>
+<td style="text-align:center">ownKeys</td>
+</tr>
+<tr>
+<td style="text-align:center">[[Call]]</td>
+<td style="text-align:center">apply</td>
+</tr>
+<tr>
+<td style="text-align:center">[[Construct]]</td>
+<td style="text-align:center">construct</td>
+</tr>
+<tr>
+<td style="text-align:center">[[DefineOwnProperty]]</td>
+<td style="text-align:center">defineProperty</td>
+</tr>
+<tr>
+<td style="text-align:center">[[Enumerate]]</td>
+<td style="text-align:center">enumerate</td>
+</tr>
+<tr>
+<td style="text-align:center">[[GetOwnProperty]]</td>
+<td style="text-align:center">getOwnPropertyDescriptor</td>
+</tr>
+</tbody>
+</table>
+<h3 id="creating-a-revocable-proxies">Creating a Revocable Proxies</h3>
+<p>Besides creating common Proxies, we can also create temporary revocable proxies, which can be dismantle any time we want. To create a revocable Proxy, we need to use <code>Proxy.revocable(target, handler)</code> (<em>instead of new Proxy(target, handler)</em>), and instead of returning the Proxy directly, it&#x2019;ll return an Object that would looks like <code>{ proxy, revoke()&lt;Function&gt; },</code> An Example,</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> targetObj = {a:<span class="hljs-number">1</span>, b:<span class="hljs-number">2</span>, c:<span class="hljs-number">3</span>},
+    handler = {
+        get: (target, key, context) =&gt; {
+            <span class="hljs-keyword">return</span> target[key] + <span class="hljs-string">&apos; from Proxy&apos;</span>;
+        },
+        set: (target, key, value) =&gt; {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;setting &quot;</span> + value + <span class="hljs-string">&quot; @&quot;</span> + key + <span class="hljs-string">&quot; By Proxy set handler&quot;</span>);
+            target[key] = value;
+        }        
+    },
+    {proxy, revoke} = <span class="hljs-built_in">Proxy</span>.revocable(targetObj, handler);
+
+    proxy.a; <span class="hljs-comment">// console / return &apos;1 from Proxy&apos;</span>
+
+    revoke(); <span class="hljs-comment">// Revoking or Disabling proxy </span>
+
+    proxy.a <span class="hljs-comment">// Uncaught TypeError: Cannot perform &apos;get&apos; on a proxy that has been revoked at &lt;anonymous&gt;:1:6</span>
+</code></pre>
+<h4 id="proxies-as-prototypes">Proxies as prototypes </h4>
+<p>As we know Proxies don&apos;t have a prototype but it doesn&apos;t mean it can be used as a prototype,  By extending the above example with <code>targetObj</code> and <code>handler</code></p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> obj = <span class="hljs-built_in">Object</span>.create(proxyObj);
+
+obj.a <span class="hljs-comment">// console &quot;1 from Proxy&quot;</span>
+</code></pre>
+<p>By the above example, we have now extended the object&apos;s Prototype using proxy object via <a href="https://msdn.microsoft.com/en-us/library/hh924508(v=vs.94" target="_blank"><em>Explicit Prototype</em></a>.</p>
+<p><strong>Using Proxies to hide all Properties </strong></p>
+<p>We can use Proxies to make every property in an object completely hidden, except for when getting the value. All ways we can find out if a property exists on an Object in JavaScript:</p>
+<ol>
+<li><em>Reflect.has</em>,<em>Object.hasOwnProperty</em>,<em>Object.prototype.hasOwnProperty</em>, and the <em>in</em> operator all use [[<strong>HasProperty</strong>]]. Proxy can trap this with <code>has</code>.</li>
+<li><em>Object.keys</em>/<em>Object.getOwnPropertyNames</em>, which uses [[<strong>OwnPropertyKeys</strong>]]. Proxy can trap this with <code>ownKeys</code>.</li>
+<li><em>Object.entries </em>(an upcoming ES2017 feature), also uses [[<strong>OwnPropertyKeys</strong>]] - again - trapped by ownKeys.</li>
+<li><em>Object.getOwnPropertyDescriptor</em> which uses [[<strong>GetOwnProperty</strong>]]. Proxy can trap this with, surprise surprise, getOwnPropertyDescriptor.</li>
+</ol>
+<p>that being said, with this kind of implementation, we can totally hide the properties of an Object. An Example</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> propertiesToHide = [<span class="hljs-string">&apos;a&apos;</span>, <span class="hljs-string">&apos;c&apos;</span>]; <span class="hljs-comment">// To hide properties `a` and `c</span>
+<span class="hljs-keyword">let</span> targetObj = {a:<span class="hljs-number">1</span>, b:<span class="hljs-number">2</span>, c:<span class="hljs-number">3</span>},
+    handler = {
+      has(target, property) {
+        <span class="hljs-keyword">if</span> (propertiesToHide.indexOf(property) != <span class="hljs-number">-1</span>) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+        }
+        <span class="hljs-keyword">return</span> target[property]; <span class="hljs-comment">// Best Method use Reflect.has(target, property);</span>
+      },
+      ownKeys(target) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.ownKeys(target).filter( <span class="hljs-comment">// Best Method use Reflect.ownKeys..</span>
+          (property) =&gt; propertiesToHide.indexOf(property) == <span class="hljs-number">-1</span>
+        );
+      },
+      getOwnPropertyDescriptor(target, property) {
+        <span class="hljs-keyword">if</span> (propertiesToHide.indexOf(property) != <span class="hljs-number">-1</span>) {
+          <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.getOwnPropertyDescriptor(target, property);<span class="hljs-comment">// Best Method use Reflect.getOwnPropertyDe..</span>
+      }
+    },
+    proxyObj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(targetObj, handler);
+
+    <span class="hljs-built_in">Object</span>.keys(proxyObj) <span class="hljs-comment">// console [&apos;b&apos;];</span>
+    proxyObj.hasOwnProperty(<span class="hljs-string">&apos;a&apos;</span>) <span class="hljs-comment">// would return false;</span>
+    proxyObj.hasOwnProperty(<span class="hljs-string">&apos;b&apos;</span>) <span class="hljs-comment">// would return true;</span>
+    <span class="hljs-built_in">Object</span>.getOwnPropertyNames(proxyObj) <span class="hljs-comment">// would return [&apos;b&apos;];</span>
+
+    proxyObj.a; <span class="hljs-comment">// would return 1;</span>
+</code></pre>
+<p>NOTE: <em>By the above implementation, we can only hide the properties of an Object that it holds, its value is still accessible.</em></p>
+<p><em><strong>Binggo </strong></em><strong>!!!</strong>  <strong>some of the use cases for proxies</strong></p>
+<ol>
+<li><p>Tracing property accesses:<br>Consider a naive example, where we wanna trace out all the properties of an Object that are accessed/modified. To demonstrate how that works, let&#x2019;s create a class and trace accesses to the properties of an instance.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> targetObj = {a:<span class="hljs-number">1</span>, b:<span class="hljs-number">2</span>, c:<span class="hljs-number">3</span>},
+ tracePropAccessFn = (target, props) =&gt; {  
+ <span class="hljs-keyword">let</span> propKeySet = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>(...props);  
+     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(target, {  
+         get(target, propKey, receiver) {  
+             <span class="hljs-keyword">if</span> (propKeySet.has(propKey)) {  
+                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;GET &apos;</span>+propKey);  
+             }  
+             <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, propKey, receiver); <span class="hljs-comment">// If not Reflect can use target[propKey]  </span>
+         },  
+         set(target, propKey, value, receiver) {  
+             <span class="hljs-keyword">if</span> (propKeySet.has(propKey)) {  
+                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;SET &apos;</span>+propKey+<span class="hljs-string">&apos; = &apos;</span>+value);  
+             }  
+             <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.set(target, propKey, value, receiver);<span class="hljs-comment">// If not Reflect can use target[propKey]</span>
+
+         },
+     });
+ },
+ proxyObj = tracePropAccessFn(targetObj, <span class="hljs-built_in">Object</span>.keys(targetObj));
+
+ proxyObj.a <span class="hljs-comment">// would console `GET` a &amp; return value &apos;1&apos;</span>
+
+ proxyObj.a = <span class="hljs-number">100</span>; <span class="hljs-comment">// would console `SET a = 100` &amp; return &apos;100&apos;</span>
+</code></pre>
+</li>
+<li><p>Tackling unknown properties:</p>
+<p>An such example would be throwing an exception, If the accessed property doesn&#x2019;t even exist in the prototype chain of an Object.</p>
+<pre><code class="lang-js"><span class="hljs-keyword">let</span> propertyChecker = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>({}, {
+         get(target, propKey, receiver) {
+            <span class="hljs-keyword">if</span> (!(propKey <span class="hljs-keyword">in</span> target)) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">ReferenceError</span>(<span class="hljs-string">&apos;OOPS!!! Unknown property: &apos;</span> + propKey);
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, propKey, receiver);<span class="hljs-comment">// If not Reflect can use target[propKey]</span>
+        }
+    });
+
+    <span class="hljs-comment">// Create all Object with property checker via explicit prototype.</span>
+    <span class="hljs-keyword">let</span> sampleObj = <span class="hljs-built_in">Object</span>.create(propertyChecker);
+
+    <span class="hljs-comment">// Accessing non property of an object</span>
+
+    sampleObj.a <span class="hljs-comment">// Uncaught ReferenceError:OOPS!!! Unknown property:</span>
+</code></pre>
+</li>
+<li><p>Restricting Access to Properties when needed / for a particular time:</p>
+<p>In the fallowing example, we try to restrict the access of a property over the period of time to avoid race condition or to maintain atomicity in the current workflow.</p>
+</li>
+<li><pre><code class="lang-js"><span class="hljs-keyword">let</span> isLoaded = <span class="hljs-literal">false</span>, <span class="hljs-comment">// Initially data is not loaded, hence set to &apos;false&apos; by default</span>
+    data = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>({}, {
+                get(target, propKey, receiver) {
+                    <span class="hljs-keyword">if</span> (!isLoaded) {
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&apos;Revoked&apos;</span>); <span class="hljs-comment">// return &apos;false&apos; depending on the use-case</span>
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, propKey, receiver);
+                },
+                has(target, propKey) {
+                    <span class="hljs-keyword">if</span> (!isLoaded) {
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&apos;Revoked&apos;</span>); <span class="hljs-comment">// return &apos;false&apos; depending on the use-case</span>
+                    }
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.has(target, propKey);
+                }
+        });
+    data.sampleProp; <span class="hljs-comment">// Uncaught TypeError: Revoked. </span>
+    data.a <span class="hljs-comment">// Uncaught TypeError: Revoked. </span>
+
+    $.ajax.onSuccess(err, res) {
+        res[<span class="hljs-string">&apos;sampleProp&apos;</span>] = <span class="hljs-string">&quot;injecting sample prop value for testing&quot;</span>
+        data = res; <span class="hljs-comment">// save ajax response into data Object </span>
+        isLoaded = <span class="hljs-literal">true</span>; <span class="hljs-comment">// make Object accessible once data saved for further process         </span>
+   }
+
+   data.sampleProp <span class="hljs-comment">// would print the value</span>
+   data.a <span class="hljs-comment">// return `undefined`</span>
+</code></pre>
+</li>
+</ol>
+<h3 id="conclusion"></h3>
+<h3 id="conclusion">Conclusion </h3>
+<p><em>Proxies</em>, An Ability to modify itself is way cool, but should not be misused as a hack to accomplish certain tasks, a lot more can be accomplished as showed in examples above rather than just using only getter and setter. For instance, it could be used to build certain functionalities into a library or framework, or to make a special kind of objects to be used throughout your application. one such example as we have seen before is Revocable proxies which are useful for when we need to pass our objects to untrusted, third party code thus controlling the property access. </p>
+<div class="gitbook-share"></div>
+
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="symbols.html" class="navigation navigation-prev " aria-label="Previous page: Symbols">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="reflections.html" class="navigation navigation-next " aria-label="Next page: Reflections">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Proxies","level":"1.1.2","depth":2,"next":{"title":"Reflections","level":"1.1.3","depth":2,"path":"reflections.md","ref":"reflections.md","articles":[]},"previous":{"title":"Symbols","level":"1.1.1","depth":2,"path":"symbols.md","ref":"symbols.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"/home/dominic/workspace/Git/blog/node_modules/gitbook-plugin-blog-r24y/theme","variables":{},"plugins":["blog-r24y","es6tabs","share","ga"],"pluginsConfig":{"es6tabs":{"presets":["es2015","react"]},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"blog-r24y":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-88278648-2"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"share":{}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"proxies.md","mtime":"2017-01-13T12:16:21.148Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-13T12:24:40.177Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-share/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
