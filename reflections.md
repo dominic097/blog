@@ -191,16 +191,25 @@ Reflect.getPrototypeOf(new Auto()) == Auto.prototype; // True
 
 #### Reflect.setPrototypeOf `( target, proto )`
 
-Of course, we wouldn’t have _getPrototypeOf_ without _setPrototypeOf_. Now, _Object.setPrototypeOf_ will throw an Error for non-objects, but it tries to coerce the given argument into an Object, and also if the \[\[**SetPrototype**\]\] internal operation fails, it’ll throw an _TypeError_, if it succeeds it’ll return the target argument.
-
-Reflect.setPrototypeOf is much more basic - if it receives a non-object it’ll throw a _TypeError_, but other than that, it’ll just return the result of \[\[**SetPrototypeOf**\]\] - which is a Boolean indicating if operation was successful. This is useful because then we can manage the outcome without using a try/catch which will also catch any other _TypeErrors_ from passing in incorrect arguments. An Example,
+Of course, we wouldn’t have _getPrototypeOf_ without _setPrototypeOf_. _Reflect.setPrototypeOf_ is much more basic - if it receives a non-object it’ll throw a _TypeError_, but other than that, It sets the prototype \(i.e., the internal \[\[Prototype\]\] property\) of a specified object to another object or to null and return the result of \[\[**SetPrototypeOf**\]\] - which is a Boolean indicating if operation was successful. An Example,
 
 ```js
 // consider the Auto example,
 class Auto {...}
-let instance = new Auto();
+let instance = new Auto("Pollo");
 
-Reflect.setPrototypeOf(instance, Wheel.prototype);
+Reflect.setPrototypeOf(instance, Array.prototype); // Applying Array.prototype to Auto Instance
+
+// It can change an object's [[Prototype]] to null.
+Reflect.setPrototypeOf({}, null); // true
+
+// Returns false if target is not extensible.
+Reflect.setPrototypeOf(Object.freeze({}), null); // false
+
+//The Diffrence
+Object.setPrototypeOf(1); // Uncaught TypeError: Object prototype may only be an Object or null: undefined
+Reflect.setPrototypeOf(1); //VM1841:1 Uncaught TypeError: Reflect.setPrototypeOf called on non-object
+
 ```
 
 
