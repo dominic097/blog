@@ -91,7 +91,7 @@ Reflect.getOwnPropertyDescriptor(obj, "x");
 // would return Object {value: 7, writable: false, enumerable: false, configurable: false}
 ```
 
-The Reflect.getOwnPropertyDescriptor intern calls the Object.getOwnPropertyDescriptor but the difference is,
+The _Reflect.getOwnPropertyDescriptor_ intern calls the _Object.getOwnPropertyDescriptor_ but the difference is,
 
 ```js
 // would return Uncaught TypeError: Reflect.getOwnPropertyDescriptor called on non-object
@@ -99,6 +99,12 @@ Reflect.getOwnPropertyDescriptor('foo', 'f');
 
 Object.getOwnPropertyDescriptor('foo', 'f'); // would return just 'undefined'
 ```
+
+
+
+#### Reflect.has` ( target, propertyKey )`
+
+Reflect.has is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property.
 
 
 
