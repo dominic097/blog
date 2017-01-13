@@ -1,6 +1,6 @@
 # Proxies
 
-Proxies allow us to define JS objects in a way that were impossible before.
+Proxies allow us to re-define JS in a way that is never possible before.
 
 ---
 
@@ -49,7 +49,7 @@ By the above example,
 
 As we know every proxy object is an exotic object whose essential internal methods are partially implemented using ECMAScript. Every proxy objects has an internal slot called \[\[ProxyHandler\]\] aka trap / handler hook function callbacks. The value of \[\[**ProxyHandler**\]\] is an object, called the proxy’s handler object or **null **by default. Every proxy object also has an internal slot called \[\[**ProxyTarget**\]\] whose value is either an object or **null **value. This object is called the proxy’s target object as in our case it's _targetObj_ as per above example.
 
-The below table \[_Proxy Handler Methods_\] shows the internal method's and it's respective Handler Method's which we will discuss  with example implementation below,
+The below table \[_Proxy Handler Methods_\] shows the internal method's and it's respective Handler Method's where some of them will be implemented in upcoming examples,
 
 | Internal Method | Handler Method |
 | :---: | :---: |
@@ -106,14 +106,14 @@ By the above example, we have now extended the object's Prototype using proxy ob
 
 **Using Proxies to hide all Properties **
 
-We can use Proxies to make every property in an object completely hidden, except for when getting the value. Here’s all of the ways you can find out if a property exists on an Object in JavaScript:
+We can use Proxies to make every property in an object completely hidden, except for when getting the value. All ways we can find out if a property exists on an Object in JavaScript:
 
 1. _Reflect.has_,_Object.hasOwnProperty_,_Object.prototype.hasOwnProperty_, and the _in_ operator all use \[\[**HasProperty**\]\]. Proxy can trap this with `has`.
 2. _Object.keys_/_Object.getOwnPropertyNames_, which uses \[\[**OwnPropertyKeys**\]\]. Proxy can trap this with `ownKeys`.
 3. _Object.entries _\(an upcoming ES2017 feature\), also uses \[\[**OwnPropertyKeys**\]\] - again - trapped by ownKeys.
 4. _Object.getOwnPropertyDescriptor_ which uses \[\[**GetOwnProperty**\]\]. Proxy can trap this with, surprise surprise, getOwnPropertyDescriptor.
 
-with the implenentaion , we can totally hide the properties of an Object. An Example
+that being said, with this kind of implementation, we can totally hide the properties of an Object. An Example
 
 ```js
 let propertiesToHide = ['a', 'c']; // To hide properties `a` and `c
@@ -123,10 +123,10 @@ let targetObj = {a:1, b:2, c:3},
         if (propertiesToHide.indexOf(property) != -1) {
           return false;
         }
-        return Reflect.has(target, property);
+        return target[property]; // Best Method use Reflect.has(target, property);
       },
       ownKeys(target) {
-        return Reflect.ownKeys(target).filter(
+        return Object.ownKeys(target).filter( // Best Method use Reflect.ownKeys..
           (property) => propertiesToHide.indexOf(property) == -1
         );
       },
@@ -134,7 +134,7 @@ let targetObj = {a:1, b:2, c:3},
         if (propertiesToHide.indexOf(property) != -1) {
           return undefined;
         }
-        return Reflect.getOwnPropertyDescriptor(target, property);
+        return Object.getOwnPropertyDescriptor(target, property);// Best Method use Reflect.getOwnPropertyDe..
       }
     },
     proxyObj = new Proxy(targetObj, handler);
@@ -147,5 +147,98 @@ let targetObj = {a:1, b:2, c:3},
     proxyObj.a; // would return 1;
 ```
 
-NOTE: By the above implementation, we can only hide the properties of an Object that it holds, it's value is still accessible.
+NOTE: _By the above implementation, we can only hide the properties of an Object that it holds, its value is still accessible._
+
+_**Binggo **_**!!!**  **some of the use cases for proxies**
+
+1. Tracing property accesses:  
+   Consider a naive example, where we wanna trace out all the properties of an Object that are accessed/modified. To demonstrate how that works, let’s create a class and trace accesses to the properties of an instance.
+
+   ```js
+   let targetObj = {a:1, b:2, c:3},
+    tracePropAccessFn = (target, props) => {  
+    let propKeySet = new Set(...props);  
+        return new Proxy(target, {  
+            get(target, propKey, receiver) {  
+                if (propKeySet.has(propKey)) {  
+                    console.log('GET '+propKey);  
+                }  
+                return Reflect.get(target, propKey, receiver); // If not Reflect can use target[propKey]  
+            },  
+            set(target, propKey, value, receiver) {  
+                if (propKeySet.has(propKey)) {  
+                    console.log('SET '+propKey+' = '+value);  
+                }  
+                return Reflect.set(target, propKey, value, receiver);// If not Reflect can use target[propKey]
+
+            },
+        });
+    },
+    proxyObj = tracePropAccessFn(targetObj, Object.keys(targetObj));
+
+    proxyObj.a // would console `GET` a & return value '1'
+
+    proxyObj.a = 100; // would console `SET a = 100` & return '100'
+   ```
+
+2. Tackling unknown properties:
+
+   An such example would be throwing an exception, If the accessed property doesn’t even exist in the prototype chain of an Object.
+
+   ```js
+   let propertyChecker = new Proxy({}, {
+            get(target, propKey, receiver) {
+               if (!(propKey in target)) {
+                   throw new ReferenceError('OOPS!!! Unknown property: ' + propKey);
+               }
+               return Reflect.get(target, propKey, receiver);// If not Reflect can use target[propKey]
+           }
+       });
+
+       // Create all Object with property checker via explicit prototype.
+       let sampleObj = Object.create(propertyChecker);
+
+       // Accessing non property of an object
+
+       sampleObj.a // Uncaught ReferenceError:OOPS!!! Unknown property:
+   ```
+
+3. Restricting Access to Properties when needed / for a particular time:
+
+   In the fallowing example, we try to restrict the access of a property over the period of time to avoid race condition or to maintain atomicity in the current workflow.
+
+4. ```js
+   let isLoaded = false, // Initially data is not loaded, hence set to 'false' by default
+       data = new Proxy({}, {
+                   get(target, propKey, receiver) {
+                       if (!isLoaded) {
+                           throw new TypeError('Revoked'); // return 'false' depending on the use-case
+                       }
+                       return Reflect.get(target, propKey, receiver);
+                   },
+                   has(target, propKey) {
+                       if (!isLoaded) {
+                           throw new TypeError('Revoked'); // return 'false' depending on the use-case
+                       }
+                       return Reflect.has(target, propKey);
+                   }
+           });
+       data.sampleProp; // Uncaught TypeError: Revoked. 
+       data.a // Uncaught TypeError: Revoked. 
+
+       $.ajax.onSuccess(err, res) {
+           res['sampleProp'] = "injecting sample prop value for testing"
+           data = res; // save ajax response into data Object 
+           isLoaded = true; // make Object accessible once data saved for further process         
+      }
+
+      data.sampleProp // would print the value
+      data.a // return `undefined`
+   ```
+
+###  {#conclusion}
+
+### Conclusion {#conclusion}
+
+_Proxies_, An Ability to modify itself is way cool, but should not be misused as a hack to accomplish certain tasks, a lot more can be accomplished as showed in examples above rather than just using only getter and setter. For instance, it could be used to build certain functionalities into a library or framework, or to make a special kind of objects to be used throughout your application. one such example as we have seen before is Revocable proxies which are useful for when we need to pass our objects to untrusted, third party code thus controlling the property access. Long live JavaScript !!!
 
