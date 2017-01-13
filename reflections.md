@@ -6,16 +6,6 @@ An non-construct built-in object that provides methods for interceptable JavaScr
 
 Reflections are all about Reflection through introspection - used to discover very low-level information about your code helping with forwarding default operations from the handler to the target. It goes hand in hand with proxies which is all about Reflection through intercession - wrapping Object and intercepting their behavior through traps.
 
-_**Just Making things clear !!!**_
-
-* Reflect is not a functional Object
-* Reflect doesn't have a \[\[Construct\]\] internal method
-* It is not possible to use the Reflect Object with the `new`  Operatior
-* Reflect Object doesn't have a \[\[Call\]\] internal method
-* It is not possible to invoke Reflect Object as a functional method_\_\_\_
-
----
-
 The fallowing are the static functions that Reflection Object provides, It has the same names as the proxy handler methods where some of them are same as corresponding methods on Object.
 
 #### Reflect.apply `( target, thisArgument, argumentsList )`
@@ -210,6 +200,20 @@ Reflect.setPrototypeOf(Object.freeze({}), null); // false
 Object.setPrototypeOf(1); // Uncaught TypeError: Object prototype may only be an Object or null: undefined
 Reflect.setPrototypeOf(1); //VM1841:1 Uncaught TypeError: Reflect.setPrototypeOf called on non-object
 ```
+
+_**Just Making things clear !!!**_
+
+* Reflect is not a functional Object
+* Reflect doesn't have a \[\[Construct\]\] internal method
+* It is not possible to use the Reflect Object with the `new`  Operatior
+* Reflect Object doesn't have a \[\[Call\]\] internal method
+* It is not possible to invoke Reflect Object as a functional method
+
+
+
+
+### Conclusion
+Meta Programming an ability to examine, introspect, and modify its own structure and behavior at runtime. Thus JavaScript being a dynamic language, the Proxies and Reflection gives the flexibility to achieve Meta-Programming.
 
 
 
