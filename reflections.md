@@ -61,7 +61,21 @@ instance.getModelNumber.call({model:"Pollo"}); // would print "Brand VW: Model: 
 //ES6 using Reflect
 let instanceByReflect = Reflect.construct(Auto, ["Pollo"]); //creating facory
 instanceByReflect.getModelNumber(); // would print "Brand VW: Model: Pollo"
+
+class Wheel {
+    constructor(color, base) {
+        this.color = color;
+        this.base = base;
+    }
+    getWheelType() {
+        return "Wheel Color: " + this.color + ", Wheel base: " + this.base + " , for the model " + this.model;
+    }
+
+}
+
 ```
+
+Thus with the help of Reflect.construct
 
 
 
