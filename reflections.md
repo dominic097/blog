@@ -213,7 +213,7 @@ _**Just Making things clear !!!**_
 
 
 ### Conclusion
-Meta Programming an ability to examine, introspect, and modify its own structure and behavior at runtime. Thus JavaScript being a dynamic language, the Proxies and Reflection gives the flexibility to achieve Meta-Programming.
+Meta Programming an ability to examine, introspect, and modify its own structure and behavior at runtime. Thus JavaScript being a dynamic language, the Proxies and Reflection gives the flexibility to achieve what is needed and its Obvious that we have barely scratched the surface of MP the best is yet to come!!! .
 
 
 
