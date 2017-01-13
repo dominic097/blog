@@ -143,7 +143,21 @@ arr[2]; // "goose"
 
 #### Reflect.ownKeys`(target)`
 
+Reflect.ownKeys\(\) method wroks similar like Object.Keys\(\) returns an array of the target object's own property keys. An Example,
 
+```js
+Reflect.ownKeys({z: 3, y: 2, x: 1}); // [ "z", "y", "x" ]
+Reflect.ownKeys([]); // ["length"]
+
+//Working with Symbols 
+let left = Symbol.for("LEFT");
+let right = Symbol.for("RIGHT");
+
+let obj = {left: 'left Node', right: 'right node, node: 1};
+Reflect.ownKeys(obj); // [Symbol(LEFT), Symbol(RIGHT), "node"]
+
+
+```
 
 
 
