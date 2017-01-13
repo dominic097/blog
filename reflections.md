@@ -84,11 +84,20 @@ obj.x; // 7
 
 #### Reflect.getOwnPropertyDescriptor `( target, propertyKey )`
 
-This, once again, pretty much replaces `Object.getOwnPropertyDescriptor,` getting the descriptor metadata of a property if it exists on the object, undefined otherwise. An Example 
+This, once again, pretty much replaces `Object.getOwnPropertyDescriptor,` getting the descriptor metadata of a property if it exists on the object, undefined otherwise. An Example
 
 ```js
 Reflect.getOwnPropertyDescriptor(obj, "x");
 // would return Object {value: 7, writable: false, enumerable: false, configurable: false}
+```
+
+The Reflect.getOwnPropertyDescriptor intern calls the Object.getOwnPropertyDescriptor but the difference is,
+
+```js
+// would return Uncaught TypeError: Reflect.getOwnPropertyDescriptor called on non-object
+Reflect.getOwnPropertyDescriptor('foo', 'f');
+
+Object.getOwnPropertyDescriptor('foo', 'f'); // would return just 'undefined'
 ```
 
 
