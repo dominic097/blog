@@ -209,7 +209,6 @@ Reflect.setPrototypeOf(Object.freeze({}), null); // false
 //The Diffrence
 Object.setPrototypeOf(1); // Uncaught TypeError: Object prototype may only be an Object or null: undefined
 Reflect.setPrototypeOf(1); //VM1841:1 Uncaught TypeError: Reflect.setPrototypeOf called on non-object
-
 ```
 
 
