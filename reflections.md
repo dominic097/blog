@@ -61,7 +61,6 @@ instance.getModelNumber.call({model:"Pollo"}); // would print "Brand VW: Model: 
 //ES6 using Reflect
 let instanceByReflect = Reflect.construct(Auto, ["Pollo"]); //creating facory
 instanceByReflect.getModelNumber(); // would print "Brand VW: Model: Pollo"
-
 ```
 
 
