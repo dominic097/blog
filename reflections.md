@@ -155,8 +155,6 @@ let right = Symbol.for("RIGHT");
 
 let obj = {left: 'left Node', right: 'right node, node: 1};
 Reflect.ownKeys(obj); // [Symbol(LEFT), Symbol(RIGHT), "node"]
-
-
 ```
 
 
