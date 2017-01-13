@@ -157,12 +157,20 @@ let obj = {left: 'left Node', right: 'right node, node: 1};
 Reflect.ownKeys(obj); // [Symbol(LEFT), Symbol(RIGHT), "node"]
 ```
 
-#### Reflect.preventExtensions\(\) 
+#### Reflect.preventExtensions\(\)
 
 The static _Reflect.preventExtensions\(\)_ method prevents new properties from ever being added to an object similar to _Object.preventExtensions\(\) _with an diffrence Reflect.preventExtensions can not be used against non-object value which is not the case with Object.preventExtensions. An Example,
 
 ```js
+var Obj = {};
+Reflect.isExtensible(Obj); // === true
 
+// ...but that can be changed.
+Reflect.preventExtensions(Obj);
+Reflect.isExtensible(Obj); // === false
+
+// The difference
+Reflect.preventExtensions(1);// TypeError: 1 is not an object
 ```
 
 
