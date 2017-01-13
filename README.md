@@ -8,7 +8,7 @@ In JS6 MP can be achieved with
 
 * ##### [Symbols](https://dominic097.github.io/blog/symbols.html "Click to know more on Symbols in JavaScript")
 * ##### [Proxies](https://dominic097.github.io/blog/proxies.html "Click to know more on Proxies in JavaScript")
-* ##### [Reflections](https://dominic097.github.io/blog/reflections.html "Click to know more on Proxies in JavaScript")
+* ##### [Reflections](https://dominic097.github.io/blog/reflections.html "Click to know more on Reflections in JavaScript")
 
 # [Symbols](https://dominic097.github.io/blog/symbols.html "Click to know more on Symbols in JavaScript")
 
@@ -20,7 +20,7 @@ In a nutshell proxies are used to define custom behavior for fundamental operati
 
 By default, proxies don’t do much – in fact they don’t do anything. If you don’t set any “options”, your proxy will just work as a pass-through to the `target` object
 
-# [Reflection](https://dominic097.github.io/blog/reflections.html "Click to know more on Proxies in JavaScript")
+# [Reflection](https://dominic097.github.io/blog/reflections.html "Click to know more on Reflections in JavaScript")
 
 Reflect are build-in non constructable JS-object providing options to self-inspect and manipulate its member attributes and methods
 
