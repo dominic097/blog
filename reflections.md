@@ -54,8 +54,14 @@ class Auto {
     }    
 }
 
-let instance = Object.create(Auto.prototype);
-console.log(Auto.call(instance, "Polo"));
+//ES5 factory  method implementation
+let instance = Object.create(Auto.prototype); // creating a factory 
+instance.getModelNumber.call({model:"Pollo"}); // would print "Brand VW: Model: Pollo"
+
+//ES6 using Reflect
+let instanceByReflect = Reflect.construct(Auto, ["Pollo"]); //creating facory
+instanceByReflect.getModelNumber(); // would print "Brand VW: Model: Pollo"
+
 ```
 
 
