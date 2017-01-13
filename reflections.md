@@ -12,8 +12,8 @@ _**Just Making things clear !!!**_
 * Reflect doesn't have a \[\[Construct\]\] internal method
 * It is not possible to use the Reflect Object with the `new`  Operatior
 * Reflect Object doesn't have a \[\[Call\]\] internal method
-* It is not possible to invoke Reflect Object as a functional method
-
+* It is not possible to invoke Reflect Object as a functional method____
+____
 The fallowing are the static functions that Reflection Object provides, It has the same names as the proxy handler methods where some of them are same as corresponding methods on Object.
 
 #### Reflect.apply \( target, thisArgument, argumentsList \)
