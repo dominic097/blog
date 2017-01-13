@@ -84,7 +84,7 @@ obj.x; // 7
 
 #### Reflect.getOwnPropertyDescriptor `( target, propertyKey )`
 
-This, once again, pretty much replaces `Object.getOwnPropertyDescriptor,` getting the descriptor metadata of a property if it exists on the object, undefined otherwise. An Example
+This, once again, pretty much replaces `Object.getOwnPropertyDescriptor,` getting the descriptor metadata of a property if it exists on the object, undefined otherwise. An Example,
 
 ```js
 Reflect.getOwnPropertyDescriptor(obj, "x");
@@ -102,7 +102,7 @@ Object.getOwnPropertyDescriptor('foo', 'f'); // would return just 'undefined'
 
 #### Reflect.has`( target, propertyKey )`
 
-Reflect.has is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property. An Example
+Reflect.has is an interesting one, because it is essentially the same functionality as the in operator \(outside of a loop\). Both use the \[\[**HasProperty**\]\] internal method and returns an Boolean indicating whether or not the target has the property. An Example,
 
 ```js
 Reflect.has({x: 0}, "x"); // true
@@ -114,7 +114,7 @@ Reflect.has({x;0}, "toString"); // true
 
 #### Reflect.get`(target, propertyKey[, receiver])`
 
-Reflect.get method works like getting a property from an object \(target\[propertyKey\]\) as a function. An Example 
+Reflect.get method works like getting a property from an object \(target\[propertyKey\]\) as a function. An Example,
 
 ```js
 // Object
@@ -123,6 +123,22 @@ Reflect.get(obj, "a"); // 1
 
 // Array
 Reflect.get(["zero", "one"], 1); // "one"
+```
+
+#### Reflect.set`(target, propertyKey, value[, receiver])`
+
+Reflect.set method works like setting a property on an object. An Example,
+
+```js
+// Object
+var obj = {};
+Reflect.set(obj, "prop", "value"); // true
+obj.prop; // "value"
+
+// Array
+var arr = ["duck", "duck", "duck"];
+Reflect.set(arr, 2, "goose"); // true
+arr[2]; // "goose"
 ```
 
 
